@@ -1,8 +1,10 @@
-package com.example.ecom_seller;
+package com.example.ecom_seller.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.ecom_seller.R;
 
 public class MainActivity extends AppCompatActivity {
 

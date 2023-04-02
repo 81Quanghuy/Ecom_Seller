@@ -1,9 +1,10 @@
-package com.example.ecom_seller;
+package com.example.ecom_seller.dataLocal;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
+import com.example.ecom_seller.activity.LoginActivity;
 import com.example.ecom_seller.model.User;
 
 public class SharedPrefManager {
@@ -37,13 +38,13 @@ public class SharedPrefManager {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(KEY_ID, user.getId());
         editor.putString(KEY_USERNAME, user.getUsername());
-        editor.putString(KEY_FIRSTNAME, user.getFirstName());
-        editor.putString(KEY_LASTNAME, user.getLastName());
-        editor.putString(KEY_EMAIL, user.getEmail());
-        editor.putString(KEY_ADDRESS, user.getAddress());
-        editor.putString(KEY_IMAGES, user.getAvatar());
-        editor.putString(KEY_PHONE, user.getPhone());
-        editor.putString(KEY_STORE_ID, user.getStores().getId());
+//        editor.putString(KEY_FIRSTNAME, user.getFirstName());
+//        editor.putString(KEY_LASTNAME, user.getLastName());
+//        editor.putString(KEY_EMAIL, user.getEmail());
+//        editor.putString(KEY_ADDRESS, user.getAddress());
+//        editor.putString(KEY_IMAGES, user.getAvatar());
+//        editor.putString(KEY_PHONE, user.getPhone());
+       // editor.putString(KEY_STORE_ID, user.getStores().getId());
 
         editor.apply();
     }

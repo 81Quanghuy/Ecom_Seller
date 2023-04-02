@@ -1,4 +1,4 @@
-package com.example.ecom_seller;
+package com.example.ecom_seller.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,12 +13,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ecom_seller.R;
+import com.example.ecom_seller.dataLocal.SharedPrefManager;
 import com.example.ecom_seller.api.APIService;
-import com.example.ecom_seller.model.ApiUser;
 import com.example.ecom_seller.model.User;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,10 +25,8 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
 
     TextView sing_up;
-
     EditText edtUsername,edtPassword;
     Button login;
-    String error;
     User user ;
     ProgressBar progressBar;
     @Override
@@ -52,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         sing_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, SignUp.class);
+                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -79,7 +75,6 @@ public class LoginActivity extends AppCompatActivity {
                 user = response.body();
                 if(user != null){
                     SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
-                    Log.e("TAG",user.getFirstName());
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -91,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 Log.e("TAG",t.getMessage()+"");
-                Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Sai tên đăng nhập hoặc mật khẩu",Toast.LENGTH_SHORT).show();
             }
         });
     }
