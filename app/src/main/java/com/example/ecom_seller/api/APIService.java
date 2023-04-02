@@ -14,7 +14,7 @@ import retrofit2.http.Query;
 
 public interface APIService {
     //public static final String BASE_URL="http://app.iotstar.vn/shoppingapp/";
-    public static final String BASE_URL="https://ecom-server.up.railway.app/";
+    public static final String BASE_URL="https://ecomserver.up.railway.app/";
     Gson gson = new GsonBuilder().setDateFormat("yyyy MM dd HH:mm:ss").create();
     APIService apiService = new Retrofit.Builder()
             .baseUrl(BASE_URL)
