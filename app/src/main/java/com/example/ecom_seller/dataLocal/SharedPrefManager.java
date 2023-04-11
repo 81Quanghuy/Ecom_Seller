@@ -54,21 +54,21 @@ public class SharedPrefManager {
         return sharedPreferences.getString(KEY_USERNAME, null) != null;
     }
 
-    public User getUser(){
-        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        return new User(
-                sharedPreferences.getString(KEY_ID, null),
-                sharedPreferences.getString(KEY_USERNAME, null),
-                sharedPreferences.getString(KEY_EMAIL, null),
-                sharedPreferences.getString(KEY_ADDRESS, null),
-                sharedPreferences.getString(KEY_PHONE,null),
-                sharedPreferences.getString(KEY_FIRSTNAME,null),
-                sharedPreferences.getString(KEY_LASTNAME,null),
-                sharedPreferences.getString(KEY_STORE_ID,null),
-
-                sharedPreferences.getString(KEY_IMAGES, null)
-        );
-    }
+//    public User getUser(){
+//        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+//        return new User(
+//                sharedPreferences.getString(KEY_ID, null),
+//                sharedPreferences.getString(KEY_USERNAME, null),
+//                sharedPreferences.getString(KEY_EMAIL, null),
+//                sharedPreferences.getString(KEY_ADDRESS, null),
+//                sharedPreferences.getString(KEY_PHONE,null),
+//                sharedPreferences.getString(KEY_FIRSTNAME,null),
+//                sharedPreferences.getString(KEY_LASTNAME,null),
+//                sharedPreferences.getString(KEY_STORE_ID,null),
+//
+//                sharedPreferences.getString(KEY_IMAGES, null)
+//        );
+//    }
     public void logout(){
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

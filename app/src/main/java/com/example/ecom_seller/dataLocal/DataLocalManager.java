@@ -34,7 +34,7 @@ public class DataLocalManager {
     }
     //Set lần đăng nhập đầu tiên
     public static void setFirstInstall(boolean isFirst){
-        DataLocalManager.getInstance().mySharedPreferences.putBooleanValue(PRE_FIRST_INSTALL, isFirst);
+        DataLocalManager.getInstance().mySharedPreferences.putBooleanValue(PRE_FIRST_INSTALL, isFirst?false:true);
     }
 
     //kiểm tra lần đăng nhập đầu tiên

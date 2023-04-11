@@ -49,4 +49,10 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.8'
     implementation "androidx.recyclerview:recyclerview-selection:1.1.0"
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+    //bo goc tron cho image view
+    implementation 'de.hdodenhof:circleimageview:1.2.1'
+
+    //RoomDatabase
+    implementation "androidx.room:room-runtime:2.5.1"
+    annotationProcessor "androidx.room:room-compiler:2.5.1"
 }

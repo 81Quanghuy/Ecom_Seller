@@ -10,93 +10,66 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_banner">
+        android:background="@drawable/background_primary">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="120dp">
+                android:layout_height="100dp"
+                app:layout_constraintBottom_toTopOf="@+id/textView3"
+                app:layout_constraintTop_toTopOf="@+id/textView3">
 
-                <ImageView
-                    android:id="@+id/imageView"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgProfile01"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.2"
                     app:srcCompat="@drawable/profile" />
 
                 <com.example.ecom_seller.customTextView.OpenSansBold
-                    android:id="@+id/tvName"
+                    android:id="@+id/tvNameAccount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Toàn Hoàng"
+                    android:text="@string/name_seller"
                     android:textColor="#000000"
-                    android:textSize="28sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/imageView"
-                    app:layout_constraintTop_toTopOf="@+id/imageView" />
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="1 Đã Thích"
-                    android:textColor="#000000"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toStartOf="@+id/tvName"
-                    app:layout_constraintTop_toBottomOf="@+id/tvName" />
-
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="0 Đang Theo Dõi"
-                    android:textColor="#000000"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView3"
-                    app:layout_constraintStart_toEndOf="@+id/textView3"
-                    app:layout_constraintTop_toTopOf="@+id/textView3" />
-
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="0 Mã Giảm Giá"
-                    android:textColor="#000000"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView5"
-                    app:layout_constraintStart_toEndOf="@+id/textView5"
-                    app:layout_constraintTop_toTopOf="@+id/textView5"
-                    app:layout_constraintVertical_bias="1.0" />
-
-                <ImageView
-                    android:id="@+id/btn_setting_profile"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                    app:layout_constraintBottom_toTopOf="@+id/idSeller"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/imageView"
-                    app:srcCompat="@drawable/hexagon_out" />
+                    app:layout_constraintHorizontal_bias="0.06"
+                    app:layout_constraintStart_toEndOf="@+id/imgProfile01"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <TextView
+                    android:id="@+id/idSeller"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dp"
+                    android:text="idSeller"
+                    android:textColor="#807f84"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/tvNameAccount"
+                    app:layout_constraintTop_toBottomOf="@+id/tvNameAccount" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
-                android:layout_height="120sp"
+                android:layout_height="110sp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+
                 android:background="@drawable/white_background">
 
                 <TextView
@@ -106,9 +79,9 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:text="Đơn hàng của tôi"
-                    android:textColor="#000000"
-                    android:textSize="14sp"
+                    android:text="Number of days as a seller:"
+                    android:textColor="#807f84"
+                    android:textSize="11sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -117,156 +90,93 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:drawableRight="@drawable/next_action"
+                    android:layout_marginEnd="7dp"
                     android:gravity="center"
-                    android:text="Xem tất cả đơn hàng"
+                    android:text="@string/day_login"
                     android:textColor="#000000"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <View
+                    android:id="@+id/separator_straight"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginTop="35dp"
+                    android:background="@drawable/separator"
+                    app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="DuplicateIds" />
+
                 <LinearLayout
+                    android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="0dp"
+
+                    android:gravity="center"
                     android:orientation="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView">
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/separator_straight">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="5dp"
-                        android:layout_weight="0.2"
-                        android:orientation="vertical">
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
-                        <ImageView
-                            android:id="@+id/imageView3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            app:srcCompat="@drawable/wallet" />
 
                         <TextView
                             android:id="@+id/textView4"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginTop="5dp"
                             android:layout_weight="1"
+                            android:drawableStart="@drawable/store"
                             android:gravity="center"
-                            android:text="Chờ Thanh Toán"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="20dp"
+                            android:text="Shop homepage"
                             android:textColor="#000000"
-                            android:textSize="10sp" />
+                            android:textSize="14sp" />
                     </LinearLayout>
+
+                    <View
+                        android:id="@+id/separator_straight"
+                        android:layout_width="1dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/separator"
+                        tools:ignore="DuplicateIds"
+                        tools:layout_editor_absoluteX="8dp"
+                        tools:layout_editor_absoluteY="35dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="5dp"
-                        android:layout_weight="0.2"
-                        android:orientation="vertical">
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
-                        <ImageView
-                            android:id="@+id/imageView213"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            app:srcCompat="@drawable/product" />
-
-                        <TextView
-                            android:id="@+id/textView423"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="5dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="Chờ Vận Chuyển"
-                            android:textColor="#000000"
-                            android:textSize="10sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="5dp"
-                        android:layout_weight="0.2"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/imageView3456"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            app:srcCompat="@drawable/truck" />
-
-                        <TextView
-                            android:id="@+id/textView244"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="5dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="Chờ Giao Hàng"
-                            android:textColor="#000000"
-                            android:textSize="10sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="5dp"
-                        android:layout_weight="0.2"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/imageView332"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            app:srcCompat="@drawable/messenger" />
-
-                        <TextView
-                            android:id="@+id/textView457"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="5dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="Chưa Đánh Giá"
-                            android:textColor="#000000"
-                            android:textSize="10sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="5dp"
-                        android:layout_weight="0.2"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/imageView68"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            app:srcCompat="@drawable/investment" />
 
                         <TextView
                             android:id="@+id/textView43"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginTop="5dp"
                             android:layout_weight="1"
+                            android:drawableStart="@drawable/share"
                             android:gravity="center"
-                            android:text="Đơn Đã Đổi Trả"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="50dp"
+                            android:text="  Share Shop"
                             android:textColor="#000000"
-                            android:textSize="10sp" />
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -280,460 +190,312 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="120sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="8dp"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/white_background"
+                    android:orientation="vertical"
+                    android:weightSum="4">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <TextView
+                        android:id="@+id/accSetting"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="8dp"
+                        android:layout_height="60dp"
                         android:layout_weight="1"
-                        android:background="@drawable/grey_background">
+                        android:drawableRight="@drawable/next_action"
+                        android:gravity="center|start"
+                        android:paddingStart="8dp"
+                        android:text="Account Setting"
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
-                            android:id="@+id/textView8"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="12dp"
-                            android:layout_marginTop="12dp"
-                            android:drawableLeft="@drawable/cart"
-                            android:text="Xu"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            android:id="@+id/imageView2"
-                            android:layout_width="80dp"
-                            android:layout_height="60dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginBottom="8dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="@+id/textView8"
-                            app:layout_constraintTop_toBottomOf="@+id/textView8"
-                            app:srcCompat="@drawable/product" />
-
-                        <TextView
-                            android:id="@+id/textView10"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="8dp"
-                            android:text="Giảm giá thêm\n với LazCoin"
-                            android:textSize="12sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/textView8" />
-
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/button"
-                            android:layout_width="90dp"
-                            android:layout_height="30dp"
-                            android:layout_marginTop="5dp"
-                            android:background="@drawable/btn_background"
-                            android:text="Sử dụng xu"
-                            android:textColor="#ffffff"
-                            android:textSize="10sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/imageView2"
-                            app:layout_constraintTop_toBottomOf="@+id/textView10" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <View
+                        android:id="@+id/separator_straight"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="8dp"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/separator"
+                        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="DuplicateIds" />
+
+                    <TextView
+                        android:id="@+id/accHealing"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
                         android:layout_weight="1"
-                        android:background="@drawable/grey_background">
+                        android:drawableRight="@drawable/next_action"
+                        android:gravity="center|start"
+                        android:paddingStart="8dp"
+                        android:text="Account Health"
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
-                            android:id="@+id/textView82"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="12dp"
-                            android:layout_marginTop="12dp"
-                            android:drawableLeft="@drawable/cart"
-                            android:text="Xu"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                    <View
+                        android:id="@+id/separator_straight"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/separator"
+                        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="DuplicateIds" />
 
-                        <ImageView
-                            android:id="@+id/imageView23"
-                            android:layout_width="80dp"
-                            android:layout_height="60dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginBottom="8dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="@+id/textView82"
-                            app:layout_constraintTop_toBottomOf="@+id/textView82"
-                            app:srcCompat="@drawable/investment" />
+                    <TextView
+                        android:id="@+id/general_inf"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_weight="1"
+                        android:drawableRight="@drawable/next_action"
+                        android:gravity="center|start"
+                        android:paddingStart="8dp"
+                        android:text="General Information"
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
-                            android:id="@+id/textView101"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="8dp"
-                            android:text="Nhận hoàn\n tiền mỗi ngày"
-                            android:textSize="12sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/textView82" />
+                    <View
+                        android:id="@+id/separator_straight"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/separator"
+                        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="DuplicateIds" />
 
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/btnHoan"
-                            android:layout_width="90dp"
-                            android:layout_height="30dp"
-                            android:layout_marginTop="5dp"
-                            android:background="@drawable/btn_background"
-                            android:text="Kiểm tra"
-                            android:textColor="#ffffff"
-                            android:textSize="10sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/imageView23"
-                            app:layout_constraintTop_toBottomOf="@+id/textView101" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/accFacebook"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_weight="1"
+                        android:drawableRight="@drawable/next_action"
+                        android:gravity="center|start"
+                        android:paddingStart="8dp"
+                        android:text="Facebook"
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#ffffff"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/white_background"
                     android:orientation="vertical"
-                    tools:layout_marginTop="8dp">
+                    android:weightSum="4">
 
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/accStatement"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="16dp">
+                        android:layout_height="60dp"
+                        android:layout_weight="1"
+                        android:drawableRight="@drawable/next_action"
+                        android:gravity="center|start"
+                        android:paddingStart="8dp"
+                        android:text="Account Statement"
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.25"
-                            android:orientation="vertical">
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:background="@drawable/white_background">
-
-                                <ImageView
-                                    android:id="@+id/imageView20"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="16dp"
-                                    android:layout_marginTop="16dp"
-                                    android:layout_marginEnd="16dp"
-                                    android:layout_marginBottom="16dp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:srcCompat="@drawable/facebook_messenger" />
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            <TextView
-                                android:id="@+id/textView21"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="Inbox"
-                                android:textAlignment="center"
-                                android:textColor="#2e3d6d"
-                                android:textSize="14sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.25"
-                            android:orientation="vertical">
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:background="@drawable/white_radius">
-
-                                <ImageView
-                                    android:id="@+id/imageView233"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="16dp"
-                                    android:layout_marginTop="16dp"
-                                    android:layout_marginEnd="16dp"
-                                    android:layout_marginBottom="16dp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:srcCompat="@drawable/camera" />
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            <TextView
-                                android:id="@+id/textView24"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="Map"
-                                android:textAlignment="center"
-                                android:textColor="#2e3d6d"
-                                android:textSize="14sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.25"
-                            android:orientation="vertical">
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:background="@drawable/white_background">
-
-                                <ImageView
-                                    android:id="@+id/imageView10"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="16dp"
-                                    android:layout_marginTop="16dp"
-                                    android:layout_marginEnd="16dp"
-                                    android:layout_marginBottom="16dp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:srcCompat="@drawable/account" />
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            <TextView
-                                android:id="@+id/textView13"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="Chat"
-                                android:textAlignment="center"
-                                android:textColor="#2e3d6d"
-                                android:textSize="14sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.25"
-                            android:orientation="vertical">
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:background="@drawable/white_radius">
-
-                                <ImageView
-                                    android:id="@+id/imageView120"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="16dp"
-                                    android:layout_marginTop="16dp"
-                                    android:layout_marginEnd="16dp"
-                                    android:layout_marginBottom="16dp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:srcCompat="@drawable/bell_outline" />
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            <TextView
-                                android:id="@+id/textView130"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="Report"
-                                android:textAlignment="center"
-                                android:textColor="#2e3d6d"
-                                android:textSize="14sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <View
+                        android:id="@+id/separator_straight"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="16dp">
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/separator"
+                        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="DuplicateIds" />
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.25"
-                            android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/notfications"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_weight="1"
+                        android:drawableRight="@drawable/next_action"
+                        android:gravity="center|start"
+                        android:paddingStart="8dp"
+                        android:text="Notifications"
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:background="@drawable/white_radius">
+                    <View
+                        android:id="@+id/separator_straight"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/separator"
+                        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="DuplicateIds" />
 
-                                <ImageView
-                                    android:id="@+id/imageView1054"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="16dp"
-                                    android:layout_marginTop="16dp"
-                                    android:layout_marginEnd="16dp"
-                                    android:layout_marginBottom="16dp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:srcCompat="@drawable/message" />
-                            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/chat"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_weight="1"
+                        android:drawableRight="@drawable/next_action"
+                        android:gravity="center|start"
+                        android:paddingStart="8dp"
+                        android:text="Chat"
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                            <TextView
-                                android:id="@+id/textView1346"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="Tip"
-                                android:textAlignment="center"
-                                android:textColor="#2e3d6d"
-                                android:textSize="14sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
+                    <View
+                        android:id="@+id/separator_straight"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/separator"
+                        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="DuplicateIds" />
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.25"
-                            android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/chatwithSys"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_weight="1"
+                        android:drawableRight="@drawable/next_action"
+                        android:gravity="center|start"
+                        android:paddingStart="8dp"
+                        android:text="Chat with System"
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:background="@drawable/white_radius">
+                    <View
+                        android:id="@+id/separator_straight"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/separator"
+                        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="DuplicateIds" />
 
-                                <ImageView
-                                    android:id="@+id/imageView104"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="16dp"
-                                    android:layout_marginTop="16dp"
-                                    android:layout_marginEnd="16dp"
-                                    android:layout_marginBottom="16dp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:srcCompat="@drawable/cart" />
-                            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/feedback"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_weight="1"
+                        android:drawableRight="@drawable/next_action"
+                        android:gravity="center|start"
+                        android:paddingStart="8dp"
+                        android:text="Feedback"
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                            <TextView
-                                android:id="@+id/textView134"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="Calendar"
-                                android:textAlignment="center"
-                                android:textColor="#2e3d6d"
-                                android:textSize="14sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
+                    <View
+                        android:id="@+id/separator_straight"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/separator"
+                        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="DuplicateIds" />
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.25"
-                            android:orientation="vertical">
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:background="@drawable/white_radius">
-
-                                <ImageView
-                                    android:id="@+id/imageView105"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="16dp"
-                                    android:layout_marginTop="16dp"
-                                    android:layout_marginEnd="16dp"
-                                    android:layout_marginBottom="16dp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:srcCompat="@drawable/message" />
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            <TextView
-                                android:id="@+id/textView136"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="Tip"
-                                android:textAlignment="center"
-                                android:textColor="#2e3d6d"
-                                android:textSize="14sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.25"
-                            android:orientation="vertical">
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_weight="1"
-                                android:background="@drawable/white_background">
-
-                                <ImageView
-                                    android:id="@+id/imageView102"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="16dp"
-                                    android:layout_marginTop="16dp"
-                                    android:layout_marginEnd="16dp"
-                                    android:layout_marginBottom="16dp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:srcCompat="@drawable/cart" />
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            <TextView
-                                android:id="@+id/textView132"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="Orther"
-                                android:textAlignment="center"
-                                android:textColor="#2e3d6d"
-                                android:textSize="14sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/about"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_weight="1"
+                        android:drawableRight="@drawable/next_action"
+                        android:gravity="center|start"
+                        android:paddingStart="8dp"
+                        android:text="About"
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="10dp"
+                    android:orientation="vertical"
+                    android:weightSum="2">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/logout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/white_background"
+                        android:gravity="center"
+                        android:text="Log out"
+                        android:textColor="#000"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="10dp"
+                    android:orientation="vertical"
+                    android:weightSum="2">
+
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

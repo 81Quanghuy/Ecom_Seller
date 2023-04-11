@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Seller</string>
-    <string name="welcome_bac">
-        Welcome Back!
-    </string>
+    <string name="id_seller">Id_Seller</string>
+    <string name="follower">Followers</string>
+    <string name="day_login">5 Days</string>
+    <string name="name_seller">Quang Huy</string>
     <string name="forgot_pass">
         Forgot Password?
     </string>
@@ -21,22 +22,18 @@
     <string name="login">
        LOGIN
     </string>
-        <string name="action_home">Trang Chủ</string>
-        <string name="action_mall">Dạo</string>
-        <string name="action_message">Tin Nhắn</string>
-        <string name="action_cart">Giỏ Hàng</string>
-        <string name="action_account">Tài Khoản</string>
-        <!-- TODO: Remove or change this placeholder text -->
-        <string name="view_fragment">Xem Dạo</string>
-        <string name="followed_fragment">Đã Theo Dõi</string>
-        <string-array name="country">
-            <item>Áo Thun Nam</item>
-            <item>Áo Măng Tô</item>
-            <item>Áo Thun Nam Nữ</item>
-            <item>Áo Khoác Nam</item>
-            <item>Áo Ba Lỗ</item>
-            <item>Quần Âu Nam</item>
-            <item>Quần Jean</item>
-            <item>Quần Bò</item>
-        </string-array>
+    <string name="action_home">Home</string>
+    <string name="action_message">Messages</string>
+    <string name="action_cart">Order</string>
+    <string name="action_account">Me</string>
+    <string-array name="country">
+        <item>Áo Thun Nam</item>
+        <item>Áo Măng Tô</item>
+        <item>Áo Thun Nam Nữ</item>
+        <item>Áo Khoác Nam</item>
+        <item>Áo Ba Lỗ</item>
+        <item>Quần Âu Nam</item>
+        <item>Quần Jean</item>
+        <item>Quần Bò</item>
+    </string-array>
 </resources>

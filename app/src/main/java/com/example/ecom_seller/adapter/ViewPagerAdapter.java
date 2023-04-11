@@ -8,7 +8,6 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import com.example.ecom_seller.fragment.AccountFragment;
 import com.example.ecom_seller.fragment.HomeFragment;
 import com.example.ecom_seller.fragment.LiveFragment;
-import com.example.ecom_seller.fragment.MallFragment;
 import com.example.ecom_seller.fragment.NotificationFragment;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
@@ -24,12 +23,10 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             case 0 :
                 return new HomeFragment();
             case 1:
-                return new MallFragment();
-            case 2:
                 return new LiveFragment();
-            case 3:
+            case 2:
                 return new NotificationFragment();
-            case 4:
+            case 3:
                 return new AccountFragment();
         }
         return null;
@@ -38,6 +35,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     //trả về số lượng của task
     @Override
     public int getCount() {
-        return 5;
+        return 4;
     }
 }

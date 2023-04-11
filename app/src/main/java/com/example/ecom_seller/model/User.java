@@ -1,12 +1,20 @@
 package com.example.ecom_seller.model;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity(tableName = "User")
 public class User implements Serializable {
-    private String id;
-    private String firstName;
-    private String lastName;
+    @PrimaryKey
+    @NonNull
+    private String  id;
+
+    private String fullName;
     private String email;
     private String phone;
     private String username;
@@ -16,11 +24,61 @@ public class User implements Serializable {
     private String role;
     private Boolean isActive;
     private String resetpasswordtoken;
-    private Date createat;
-    private Date updateat;
-    private Store stores;
 
-    public User(String string, String string1, String string2, String string3, String string4, String string5, String string6, String string7, String string8) {
+//    private Date createat;
+//    private Date updaeat;
+
+   // private Store stores;
+
+//    public Date getCreateat() {
+//        return createat;
+//    }
+//
+//    public void setCreateat(Date createat) {
+//        this.createat = createat;
+//    }
+//
+//    public Date getUpdaeat() {
+//        return updaeat;
+//    }
+//
+//    public void setUpdaeat(Date updaeat) {
+//        this.updaeat = updaeat;
+//    }
+
+//    public Store getStores() {
+//        return stores;
+//    }
+//
+//    public void setStores(Store stores) {
+//        this.stores = stores;
+//    }
+
+
+    public User() {
+    }
+
+    public User(@NonNull String id, String fullName, String email, String phone, String username, String password, String address, String avatar, String role, Boolean isActive, String resetpasswordtoken) {
+        this.id = id;
+        this.fullName = fullName;
+        this.email = email;
+        this.phone = phone;
+        this.username = username;
+        this.password = password;
+        this.address = address;
+        this.avatar = avatar;
+        this.role = role;
+        this.isActive = isActive;
+        this.resetpasswordtoken = resetpasswordtoken;
+        //this.createat = createat;
+        //this.updaeat = updaeat;
+       // this.stores = stores;
+    }
+
+    public User(String id, String username, String pass) {
+        this.id = id;
+        this.username = username;
+        this.password = pass;
     }
 
     public String getId() {
@@ -31,20 +89,12 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getEmail() {
@@ -119,27 +169,4 @@ public class User implements Serializable {
         this.resetpasswordtoken = resetpasswordtoken;
     }
 
-    public Date getCreateat() {
-        return createat;
-    }
-
-    public void setCreateat(Date createat) {
-        this.createat = createat;
-    }
-
-    public Date getUpdateat() {
-        return updateat;
-    }
-
-    public void setUpdateat(Date updateat) {
-        this.updateat = updateat;
-    }
-
-    public Store getStores() {
-        return stores;
-    }
-
-    public void setStores(Store stores) {
-        this.stores = stores;
-    }
 }

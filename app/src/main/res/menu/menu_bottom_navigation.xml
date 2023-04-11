@@ -5,12 +5,6 @@
         android:title="@string/action_home"
         android:icon="@drawable/home">
     </item>
-
-    <item android:id="@+id/action_mall"
-        android:title="@string/action_mall"
-        android:icon="@drawable/shopping_outline">
-    </item>
-
     <item android:id="@+id/action_live"
         android:title="@string/action_message"
         android:icon="@drawable/facebook_messenger">

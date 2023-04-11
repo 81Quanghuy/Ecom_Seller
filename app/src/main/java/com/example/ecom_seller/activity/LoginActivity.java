@@ -1,5 +1,9 @@
 package com.example.ecom_seller.activity;
 
+import static com.example.ecom_seller.dataLocal.DataLocalManager.getFirstInstall;
+import static com.example.ecom_seller.dataLocal.DataLocalManager.setFirstInstall;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,9 +18,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ecom_seller.R;
+import com.example.ecom_seller.dataLocal.DataLocalManager;
 import com.example.ecom_seller.dataLocal.SharedPrefManager;
 import com.example.ecom_seller.api.APIService;
 import com.example.ecom_seller.model.User;
+import com.example.ecom_seller.roomDatabase.Database.UserDatabase;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,12 +41,14 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         AnhXa();
-        if(SharedPrefManager.getInstance(this).isLoggedIn()){
-            finish();
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        if(user!=null){
+            if(isCheckExist(user)){
+                finish();
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            }
         }
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,6 +63,16 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    private void FirstInstall() {
+        if(!DataLocalManager.getFirstInstall()){
+            Toast.makeText(this, "First Install App", Toast.LENGTH_LONG).show();
+            DataLocalManager.setFirstInstall(true);
+        }
+    }
+    private boolean isCheckExist(@NonNull User user){
+        List<User> list = UserDatabase.getInstance(this).usersDao().checkUser(user.getUsername());
+        return list != null && !list.isEmpty();
     }
 
     private void GetUser() {
@@ -74,7 +94,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 user = response.body();
                 if(user != null){
-                    SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
+
+                    AddUser(user);
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -91,8 +112,17 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    private void AddUser(User user ) {
+            UserDatabase.getInstance(this).usersDao().insertUser(user);
+    }
+
 
     private void AnhXa() {
+        List<User> userList =UserDatabase.getInstance(getApplicationContext()).usersDao().getAll();
+        if(!userList.isEmpty() && userList.size()>0){
+            user = UserDatabase.getInstance(getApplicationContext()).usersDao().getAll().get(0);
+        }
+
         sing_up = findViewById(R.id.sign_up_change);
         edtUsername = findViewById(R.id.username);
         edtPassword = findViewById(R.id.password);

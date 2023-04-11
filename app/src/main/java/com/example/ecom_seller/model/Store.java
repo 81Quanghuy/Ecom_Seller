@@ -1,9 +1,14 @@
 package com.example.ecom_seller.model;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity(tableName = "Store")
 public class Store implements Serializable {
+    @PrimaryKey
     private String id;
     private String name;
     private String bio;// mô tả
@@ -15,6 +20,9 @@ public class Store implements Serializable {
     private Integer rating;
     private Date createat;
     private Date updaeat;
+
+    public Store(String parseInt) {
+    }
 
     public String getId() {
         return id;
