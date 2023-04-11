@@ -3,10 +3,14 @@ package com.example.ecom_seller.api;
 import androidx.room.Delete;
 
 import com.example.ecom_seller.model.ImageData;
+import com.example.ecom_seller.model.Order;
+import com.example.ecom_seller.model.OrderItem;
 import com.example.ecom_seller.model.Product;
 import com.example.ecom_seller.model.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.util.List;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
@@ -15,6 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -47,4 +52,7 @@ public interface APIService {
 
     @POST("user/updateUser")
     Call<User> updateUser(@Body User user);
+
+    @GET("orderItem/getHuy")
+    Call<List<OrderItem>> getOrderHuy();
 }

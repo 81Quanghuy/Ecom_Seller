@@ -12,13 +12,13 @@ import androidx.fragment.app.Fragment;
 import com.example.ecom_seller.R;
 
 
-public class LiveFragment extends Fragment {
+public class MessageFragment extends Fragment {
 
     //Hàm trả về view
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_live, container, false);
+        View view = inflater.inflate(R.layout.fragment_message, container, false);
         return view;
     }
 }

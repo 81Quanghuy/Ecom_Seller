@@ -65,12 +65,10 @@ public class EditProfileActivity extends AppCompatActivity {
 
     Call<String> response;
 
-    public static final String TAG = SettingActivity.class.getName();
     private ActivityResultLauncher<Intent> mActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
-                    Log.d(TAG, "onActivityResult");
                     if(result.getResultCode() == Activity.RESULT_OK){
                         Intent data = result.getData();
                         if(data == null){
