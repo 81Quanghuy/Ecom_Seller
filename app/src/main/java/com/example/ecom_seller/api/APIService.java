@@ -55,4 +55,9 @@ public interface APIService {
 
     @GET("orderItem/getHuy")
     Call<List<OrderItem>> getOrderHuy();
+
+    @GET("user/list")
+    Call<List<User>> getUserAll();
+
+
 }
