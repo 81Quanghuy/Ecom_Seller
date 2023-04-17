@@ -6,7 +6,6 @@ import java.util.Date;
 public class Order implements Serializable {
     private String id;
     private User user;
-    private Store store;
     private Delivery delivery;
     private String address;
     private String phone;
@@ -19,10 +18,9 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public Order(String id, User user, Store store, Delivery delivery, String address, String phone, String status, Float price, Date createat, Date updateat, Boolean isactive) {
+    public Order(String id, User user,Delivery delivery, String address, String phone, String status, Float price, Date createat, Date updateat, Boolean isactive) {
         this.id = id;
         this.user = user;
-        this.store = store;
         this.delivery = delivery;
         this.address = address;
         this.phone = phone;
@@ -47,14 +45,6 @@ public class Order implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Store getStore() {
-        return store;
-    }
-
-    public void setStore(Store store) {
-        this.store = store;
     }
 
     public Delivery getDelivery() {

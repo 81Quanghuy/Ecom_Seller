@@ -4,73 +4,143 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00BCD4"
+    android:background="@drawable/background_primary"
     android:orientation="vertical">
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/background_primary">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutOrder"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                app:layout_constraintBottom_toTopOf="@+id/textView3"
-                app:layout_constraintTop_toTopOf="@+id/textView3">
+                android:layout_height="50sp"
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/imgProfile01"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.2"
-                    app:srcCompat="@drawable/profile" />
-
-                <com.example.ecom_seller.customTextView.OpenSansBold
-                    android:id="@+id/tvNameAccount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/name_seller"
-                    android:textColor="#000000"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/idSeller"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.06"
-                    app:layout_constraintStart_toEndOf="@+id/imgProfile01"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="packed" />
+                android:background="@drawable/white_bg_no_radius">
 
                 <TextView
-                    android:id="@+id/idSeller"
+                    android:id="@+id/textQuanLyDonHang"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="14dp"
-                    android:text="idSeller"
-                    android:textColor="#807f84"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/tvNameAccount"
-                    app:layout_constraintTop_toBottomOf="@+id/tvNameAccount" />
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="QUẢN LÝ NGƯỜI DÙNG"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textFontWeight="400"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout"
+                android:id="@+id/constrainAddUser"
                 android:layout_width="match_parent"
-                android:layout_height="110sp"
+                android:layout_height="100dp"
+
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
 
-                android:background="@drawable/white_background">
+                android:background="@drawable/white_background"
+                app:layout_constraintBottom_toBottomOf="@+id/btnaddUser"
+                app:layout_constraintTop_toBottomOf="@+id/btnaddUser">
+
+                <TextView
+                    android:id="@+id/btnaddUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="5dp"
+                    android:drawableRight="@drawable/next_action"
+                    android:gravity="center"
+                    android:text="Thêm người dùng"
+                    android:textColor="#000"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/editTextTextPersonName"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:drawableStart="@drawable/baseline_search_24"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="Tìm kiếm người dùng"
+                    android:inputType="textPersonName"
+                    android:text=""
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btnaddUser" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout123"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+
+                android:background="@drawable/background_primary">
+
+                <TextView
+                    android:id="@+id/textView123"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="Danh sách người dùng đang hoạt động"
+                    android:textColor="#807f84"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <View
+                    android:id="@+id/separator_straight"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@drawable/separator"
+                    app:layout_constraintBottom_toBottomOf="@+id/constraintLayout123"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="DuplicateIds" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="10dp"
+                android:id="@+id/rc_user"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="vertical"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+
+                android:background="@drawable/background_primary">
 
                 <TextView
                     android:id="@+id/textView"
@@ -79,24 +149,12 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:text="Number of days as a seller:"
+                    android:text="Danh sách người dùng dừng hoạt động"
                     android:textColor="#807f84"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="7dp"
-                    android:gravity="center"
-                    android:text="@string/day_login"
-                    android:textColor="#000000"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
                 <View
                     android:id="@+id/separator_straight"
@@ -104,399 +162,30 @@
                     android:layout_height="1dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="30dp"
-                    android:layout_marginEnd="30dp"
                     android:layout_marginTop="35dp"
+                    android:layout_marginEnd="30dp"
                     android:background="@drawable/separator"
-                    app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                    app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="DuplicateIds" />
 
-                <LinearLayout
-                    android:id="@+id/linearLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/separator_straight">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-
-                        <TextView
-                            android:id="@+id/textView4"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:drawableStart="@drawable/store"
-                            android:gravity="center"
-                            android:paddingStart="20dp"
-                            android:paddingEnd="20dp"
-                            android:text="Shop homepage"
-                            android:textColor="#000000"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                    <View
-                        android:id="@+id/separator_straight"
-                        android:layout_width="1dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/separator"
-                        tools:ignore="DuplicateIds"
-                        tools:layout_editor_absoluteX="8dp"
-                        tools:layout_editor_absoluteY="35dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-
-                        <TextView
-                            android:id="@+id/textView43"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:drawableStart="@drawable/share"
-                            android:gravity="center"
-                            android:paddingStart="20dp"
-                            android:paddingEnd="50dp"
-                            android:text="  Share Shop"
-                            android:textColor="#000000"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="10dp"
+                android:id="@+id/rc_userNoActice"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#F3ECEC"
-                android:orientation="vertical">
+                android:layout_height="250dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="vertical"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/white_background"
-                    android:orientation="vertical"
-                    android:weightSum="4">
 
-                    <TextView
-                        android:id="@+id/accSetting"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_weight="1"
-                        android:drawableRight="@drawable/next_action"
-                        android:gravity="center|start"
-                        android:paddingStart="8dp"
-                        android:text="Account Setting"
-                        android:textColor="#000000"
-                        android:textSize="14sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <View
-                        android:id="@+id/separator_straight"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/separator"
-                        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="DuplicateIds" />
-
-                    <TextView
-                        android:id="@+id/accHealing"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_weight="1"
-                        android:drawableRight="@drawable/next_action"
-                        android:gravity="center|start"
-                        android:paddingStart="8dp"
-                        android:text="Account Health"
-                        android:textColor="#000000"
-                        android:textSize="14sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <View
-                        android:id="@+id/separator_straight"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/separator"
-                        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="DuplicateIds" />
-
-                    <TextView
-                        android:id="@+id/general_inf"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_weight="1"
-                        android:drawableRight="@drawable/next_action"
-                        android:gravity="center|start"
-                        android:paddingStart="8dp"
-                        android:text="General Information"
-                        android:textColor="#000000"
-                        android:textSize="14sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <View
-                        android:id="@+id/separator_straight"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/separator"
-                        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="DuplicateIds" />
-
-                    <TextView
-                        android:id="@+id/accFacebook"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_weight="1"
-                        android:drawableRight="@drawable/next_action"
-                        android:gravity="center|start"
-                        android:paddingStart="8dp"
-                        android:text="Facebook"
-                        android:textColor="#000000"
-                        android:textSize="14sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/white_background"
-                    android:orientation="vertical"
-                    android:weightSum="4">
-
-                    <TextView
-                        android:id="@+id/accStatement"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_weight="1"
-                        android:drawableRight="@drawable/next_action"
-                        android:gravity="center|start"
-                        android:paddingStart="8dp"
-                        android:text="Account Statement"
-                        android:textColor="#000000"
-                        android:textSize="14sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <View
-                        android:id="@+id/separator_straight"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/separator"
-                        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="DuplicateIds" />
-
-                    <TextView
-                        android:id="@+id/notfications"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_weight="1"
-                        android:drawableRight="@drawable/next_action"
-                        android:gravity="center|start"
-                        android:paddingStart="8dp"
-                        android:text="Notifications"
-                        android:textColor="#000000"
-                        android:textSize="14sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <View
-                        android:id="@+id/separator_straight"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/separator"
-                        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="DuplicateIds" />
-
-                    <TextView
-                        android:id="@+id/chat"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_weight="1"
-                        android:drawableRight="@drawable/next_action"
-                        android:gravity="center|start"
-                        android:paddingStart="8dp"
-                        android:text="Chat"
-                        android:textColor="#000000"
-                        android:textSize="14sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <View
-                        android:id="@+id/separator_straight"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/separator"
-                        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="DuplicateIds" />
-
-                    <TextView
-                        android:id="@+id/chatwithSys"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_weight="1"
-                        android:drawableRight="@drawable/next_action"
-                        android:gravity="center|start"
-                        android:paddingStart="8dp"
-                        android:text="Chat with System"
-                        android:textColor="#000000"
-                        android:textSize="14sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <View
-                        android:id="@+id/separator_straight"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/separator"
-                        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="DuplicateIds" />
-
-                    <TextView
-                        android:id="@+id/feedback"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_weight="1"
-                        android:drawableRight="@drawable/next_action"
-                        android:gravity="center|start"
-                        android:paddingStart="8dp"
-                        android:text="Feedback"
-                        android:textColor="#000000"
-                        android:textSize="14sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <View
-                        android:id="@+id/separator_straight"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/separator"
-                        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="DuplicateIds" />
-
-                    <TextView
-                        android:id="@+id/about"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_weight="1"
-                        android:drawableRight="@drawable/next_action"
-                        android:gravity="center|start"
-                        android:paddingStart="8dp"
-                        android:text="About"
-                        android:textColor="#000000"
-                        android:textSize="14sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="10dp"
-                    android:orientation="vertical"
-                    android:weightSum="2">
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/logout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/white_background"
-                        android:gravity="center"
-                        android:text="Log out"
-                        android:textColor="#000"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="10dp"
-                    android:orientation="vertical"
-                    android:weightSum="2">
-
-                </LinearLayout>
-            </LinearLayout>
         </LinearLayout>
-    </ScrollView>
 </LinearLayout>

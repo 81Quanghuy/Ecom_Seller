@@ -17,23 +17,13 @@
         Sign in
     </string>
     <string name="Sign_up">
-        Sign up
+        Thêm người dùng
     </string>
     <string name="login">
        LOGIN
     </string>
     <string name="action_home">Home</string>
-    <string name="action_message">Messages</string>
-    <string name="action_cart">Order</string>
-    <string name="action_account">Me</string>
-    <string-array name="country">
-        <item>Áo Thun Nam</item>
-        <item>Áo Măng Tô</item>
-        <item>Áo Thun Nam Nữ</item>
-        <item>Áo Khoác Nam</item>
-        <item>Áo Ba Lỗ</item>
-        <item>Quần Âu Nam</item>
-        <item>Quần Jean</item>
-        <item>Quần Bò</item>
-    </string-array>
+    <string name="action_product">Products</string>
+    <string name="action_Order">Order</string>
+    <string name="action_account">User</string>
 </resources>

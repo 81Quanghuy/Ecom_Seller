@@ -6,6 +6,11 @@ android {
     namespace 'com.example.ecom_seller'
     compileSdk 33
 
+    lintOptions {
+        checkDependencies false
+    }
+
+
     defaultConfig {
         applicationId "com.example.ecom_seller"
         minSdk 24
@@ -55,4 +60,6 @@ dependencies {
     //RoomDatabase
     implementation "androidx.room:room-runtime:2.5.1"
     annotationProcessor "androidx.room:room-compiler:2.5.1"
+
+    implementation 'com.rengwuxian.materialedittext:library:2.1.4'
 }

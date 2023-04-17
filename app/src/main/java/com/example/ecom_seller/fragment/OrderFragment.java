@@ -1,9 +1,14 @@
 package com.example.ecom_seller.fragment;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,10 +17,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ecom_seller.R;
-import com.example.ecom_seller.adapter.OrderItemAdapter;
+import com.example.ecom_seller.activity.OrderDetailActivity;
+import com.example.ecom_seller.activity.ProductDetailActivity;
+import com.example.ecom_seller.adapter.OrderAdapter;
 import com.example.ecom_seller.api.APIService;
 import com.example.ecom_seller.model.Order;
 import com.example.ecom_seller.model.OrderItem;
+import com.example.ecom_seller.model.StatusOrder;
 
 import java.util.List;
 
@@ -25,43 +33,161 @@ import retrofit2.Response;
 
 
 public class OrderFragment extends Fragment {
-    List<OrderItem> orderItemListHuy;
-    OrderItemAdapter orderItemAdapter;
-    RecyclerView rcOrderItem;
+    List<Order> orderListHuy;
+    List<Order> orderListChoXacNhan;
+    List<Order> orderListDangGiao;
+    List<Order> orderListDaGiao;
+    OrderAdapter orderAdapter;
+    RecyclerView rcOrderHuy,rcOrderDagiao,rcOrderDanggiao,rcChoXacNhan;
+    View view;
+    TextView detailHuy,detailChoXacNhan,detailDangGiao,detailDaGiao;
     //Hàm trả về view
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_order, container, false);
+        view = inflater.inflate(R.layout.fragment_order, container, false);
         AnhXa();
-        getOrderHuy();
+        getOrder();
+        detailHuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("Status", "HUY");
+                Intent intent = new Intent(getActivity(), OrderDetailActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        detailDangGiao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("Status", "DANGGIAO");
+                Intent intent = new Intent(getActivity(), OrderDetailActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        detailDaGiao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("Status", "DAGIAO");
+                Intent intent = new Intent(getActivity(), OrderDetailActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        detailChoXacNhan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("Status", "CHOXACNHAN");
+                Intent intent = new Intent(getActivity(), OrderDetailActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
         return view;
 
     }
 
     private void AnhXa() {
+
+        rcOrderHuy = view.findViewById(R.id.rc_orderHuy);
+        rcOrderDagiao  =view.findViewById(R.id.rc_orderDaGiao);
+        rcOrderDanggiao = view.findViewById(R.id.rc_orderDangGiao);
+        rcChoXacNhan = view.findViewById(R.id.rc_orderChoXacNhan);
+        detailChoXacNhan = view.findViewById(R.id.detailChoXacNhan);
+        detailDaGiao = view.findViewById(R.id.detailDaGiao);
+        detailDangGiao = view.findViewById(R.id.detalDangGiao);
+        detailHuy = view.findViewById(R.id.detailHuy);
     }
 
-    private void getOrderHuy() {
-
-        APIService.apiService.getOrderHuy().enqueue(new Callback<List<OrderItem>>() {
+    private void getOrder() {
+        APIService.apiService.getOrderList(StatusOrder.HUY).enqueue(new Callback<List<Order>>() {
             @Override
-            public void onResponse(Call<List<OrderItem>> call, Response<List<OrderItem>> response) {
+            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
                 if(response.isSuccessful()){
-                    orderItemListHuy = response.body();
-                    orderItemAdapter = new OrderItemAdapter(getContext(), orderItemListHuy);
-                    rcOrderItem.setHasFixedSize(true);
+                    orderListHuy = response.body();
+                    orderAdapter = new OrderAdapter(getContext(), orderListHuy);
+                    rcOrderHuy.setHasFixedSize(true);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-                    rcOrderItem.setLayoutManager(layoutManager);
-                    rcOrderItem.setAdapter(orderItemAdapter);
-                    orderItemAdapter.notifyDataSetChanged();
+                    rcOrderHuy.setLayoutManager(layoutManager);
+                    rcOrderHuy.setAdapter(orderAdapter);
+                    orderAdapter.notifyDataSetChanged();
                 }
             }
 
             @Override
-            public void onFailure(Call<List<OrderItem>> call, Throwable t) {
+            public void onFailure(Call<List<Order>> call, Throwable t) {
+                Log.d("TAG", t.getMessage());
+                Toast.makeText(getContext().getApplicationContext(), "Thất Bại", Toast.LENGTH_LONG).show();
+            }
+        });
+        APIService.apiService.getOrderList(StatusOrder.CHOXACNHAN).enqueue(new Callback<List<Order>>() {
+            @Override
+            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+                if(response.isSuccessful()){
+                    orderListChoXacNhan = response.body();
+                    orderAdapter = new OrderAdapter(getContext(), orderListChoXacNhan);
+                    rcChoXacNhan.setHasFixedSize(true);
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+                    rcChoXacNhan.setLayoutManager(layoutManager);
+                    rcChoXacNhan.setAdapter(orderAdapter);
+                    orderAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Order>> call, Throwable t) {
+                Log.d("TAG", t.getMessage());
+                Toast.makeText(getContext().getApplicationContext(), "Thất Bại", Toast.LENGTH_LONG).show();
 
             }
         });
+        APIService.apiService.getOrderList(StatusOrder.DANGGIAO).enqueue(new Callback<List<Order>>() {
+            @Override
+            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+                if(response.isSuccessful()){
+                    orderListDangGiao = response.body();
+                    orderAdapter = new OrderAdapter(getContext(), orderListDangGiao);
+                    rcOrderDanggiao.setHasFixedSize(true);
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+                    rcOrderDanggiao.setLayoutManager(layoutManager);
+                    rcOrderDanggiao.setAdapter(orderAdapter);
+                    orderAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Order>> call, Throwable t) {
+                Log.d("TAG", t.getMessage());
+                Toast.makeText(getContext().getApplicationContext(), "Thất Bại", Toast.LENGTH_LONG).show();
+
+            }
+        });
+        APIService.apiService.getOrderList(StatusOrder.DAGIAO).enqueue(new Callback<List<Order>>() {
+            @Override
+            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+                if(response.isSuccessful()){
+                    orderListDaGiao = response.body();
+                    orderAdapter = new OrderAdapter(getContext(), orderListDaGiao);
+                    rcOrderDagiao.setHasFixedSize(true);
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+                    rcOrderDagiao.setLayoutManager(layoutManager);
+                    rcOrderDagiao.setAdapter(orderAdapter);
+                    orderAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Order>> call, Throwable t) {
+                Log.d("TAG", t.getMessage());
+                Toast.makeText(getContext().getApplicationContext(), "Thất Bại", Toast.LENGTH_LONG).show();
+
+            }
+        });
+
     }
 }

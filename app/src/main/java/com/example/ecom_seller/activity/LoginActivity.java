@@ -32,7 +32,6 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
-    TextView sing_up;
     EditText edtUsername,edtPassword;
     Button login;
     User user ;
@@ -53,14 +52,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 GetUser();
-            }
-        });
-        sing_up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
-                startActivity(intent);
-                finish();
             }
         });
     }
@@ -122,8 +113,6 @@ public class LoginActivity extends AppCompatActivity {
         if(!userList.isEmpty() && userList.size()>0){
             user = UserDatabase.getInstance(getApplicationContext()).usersDao().getAll().get(0);
         }
-
-        sing_up = findViewById(R.id.sign_up_change);
         edtUsername = findViewById(R.id.username);
         edtPassword = findViewById(R.id.password);
         login = findViewById(R.id.loginBtn);

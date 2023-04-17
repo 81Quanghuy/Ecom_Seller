@@ -48,9 +48,10 @@ import retrofit2.Response;
 
 public class EditProfileActivity extends AppCompatActivity {
     ImageView btnBackAccount;
+    String id;
     TextView email,name,editname, phone,address,password;
 
-    AppCompatButton btnCapNhat;
+    AppCompatButton btnCapNhat,btnDelete;
     TextView image;
     ImageView imgProfle;
 
@@ -111,11 +112,34 @@ public class EditProfileActivity extends AppCompatActivity {
 
             }
         });
-
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mProgressDialog.show();
+                DeleteAccount(user);
+            }
+        });
         imgProfle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onClickRequestPermission();
+            }
+        });
+    }
+
+    private void DeleteAccount(User user) {
+        APIService.apiService.DeleteUserById(user.getId()).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.isSuccessful()){
+                    mProgressDialog.dismiss();
+                    finish();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                mProgressDialog.dismiss();
             }
         });
     }
@@ -150,20 +174,62 @@ public class EditProfileActivity extends AppCompatActivity {
         address = findViewById(R.id.edtAddress);
         password =findViewById(R.id.edtPass);
         image =findViewById(R.id.testUpload);
+        image.setVisibility(View.INVISIBLE);
+        btnDelete = findViewById(R.id.btn_delete_account);
+
         UploadData();
     }
 private void UploadData(){
-    user = UserDatabase.getInstance(getApplicationContext()).usersDao().getAll().get(0);
-    Glide.with(getApplicationContext()).load(user.getAvatar()).into(imgProfle);
-    image.setText(user.getAvatar());
-    name.setText(user.getFullName());
-    email.setText(user.getEmail());
-    editname.setText(user.getFullName());
-    phone.setText(user.getPhone());
-    address.setText(user.getAddress());
-    password.setText(user.getPassword());
+
+    Intent intent = getIntent();
+    Bundle bundle = intent.getExtras();
+    id = bundle.getString("idUser");
+    Log.e("idUser",id.toString());
+    if(id != null){
+        getUserById(id);
+    }
+    else{
+        user = UserDatabase.getInstance(getApplicationContext()).usersDao().getAll().get(0);
+        Glide.with(getApplicationContext()).load(user.getAvatar()).into(imgProfle);
+        image.setText(user.getAvatar());
+        name.setText(user.getFullName());
+        email.setText(user.getEmail());
+        editname.setText(user.getFullName());
+        phone.setText(user.getPhone());
+        address.setText(user.getAddress());
+        password.setText(user.getPassword());
+    }
+
+
 
 }
+
+    private void getUserById(String id) {
+        APIService.apiService.getUserById(id).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+
+                if(response.isSuccessful()){
+                    user = response.body();
+                    Glide.with(getApplicationContext()).load(user.getAvatar()).into(imgProfle);
+                    image.setText(user.getAvatar());
+                    name.setText(user.getFullName());
+                    email.setText(user.getEmail());
+                    editname.setText(user.getFullName());
+                    phone.setText(user.getPhone());
+                    address.setText(user.getAddress());
+                    password.setText(user.getPassword());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+
+            }
+        });
+
+    }
 
     private void callAPIUploadImage() {
         mProgressDialog.show();

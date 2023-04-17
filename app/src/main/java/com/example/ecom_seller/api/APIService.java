@@ -6,6 +6,7 @@ import com.example.ecom_seller.model.ImageData;
 import com.example.ecom_seller.model.Order;
 import com.example.ecom_seller.model.OrderItem;
 import com.example.ecom_seller.model.Product;
+import com.example.ecom_seller.model.StatusOrder;
 import com.example.ecom_seller.model.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -39,6 +40,14 @@ public interface APIService {
     @FormUrlEncoded
     Call<User> loginWithLocal( @Field("username") String username, @Field("password") String password);
 
+    @POST("user/getUserById")
+    @FormUrlEncoded
+    Call<User> getUserById(@Field("id")String id);
+
+    @POST("user/delete")
+    @FormUrlEncoded
+    Call<String> DeleteUserById(@Field("id")String id);
+
     @POST("user")
     @FormUrlEncoded
     Call<User> signUp( @Field("username") String username, @Field("password") String password);
@@ -53,11 +62,29 @@ public interface APIService {
     @POST("user/updateUser")
     Call<User> updateUser(@Body User user);
 
-    @GET("orderItem/getHuy")
-    Call<List<OrderItem>> getOrderHuy();
+    @POST("order/getList")
+    @FormUrlEncoded
+    Call<List<Order>> getOrderList(@Field("status") StatusOrder Status);
 
     @GET("user/list")
     Call<List<User>> getUserAll();
 
+    @POST("user/add")
+    Call<User> addUser(@Body User user);
+
+    @POST("user/active")
+    @FormUrlEncoded
+    Call<List<User>> getUsers(@Field("isActive") Boolean isActive);
+
+    @POST("orderItem/get")
+    @FormUrlEncoded
+    Call<List<OrderItem>> getOrderItemList(@Field("id")String id);
+
+    @POST("/order/changeStatus")
+    @FormUrlEncoded
+    Call<Order> changeStatus(@Field("id")String id,@Field("status") StatusOrder status);
+
+    @POST("order/delete")
+    Call<String> deleteOrder(@Body Order order);
 
 }

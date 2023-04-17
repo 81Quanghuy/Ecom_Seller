@@ -12,13 +12,14 @@ import androidx.fragment.app.Fragment;
 import com.example.ecom_seller.R;
 
 
-public class MessageFragment extends Fragment {
+public class ProductFragment extends Fragment {
 
     //Hàm trả về view
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_message, container, false);
+        View view = inflater.inflate(R.layout.fragment_product, container, false);
         return view;
     }
 }

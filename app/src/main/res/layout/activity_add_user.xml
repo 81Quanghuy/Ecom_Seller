@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    tools:context=".activity.AddUserActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/top_bar"
+        android:background="@drawable/top_bar">
+
+        <ImageView
+            android:id="@+id/btnBackAccount"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/white_setting" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Thêm tài khoản"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnBackAccount"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/imgprofile"
+        android:layout_below="@id/top_bar"
+        android:padding="10dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profilepic"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/product"
+            />
+
+
+        <ImageView
+            android:id="@+id/changeprofilepic"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignRight="@+id/profilepic"
+            android:layout_alignBottom="@+id/profilepic"
+            android:elevation="4dp"
+            android:src="@drawable/uploadpicdark" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_below="@id/imgprofile"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/fullname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tên người dùng"
+            app:met_baseColor="@color/black"
+            app:met_clearButton="true"
+            app:met_floatingLabel="highlight"
+            app:met_iconLeft="@drawable/profile"
+            app:met_primaryColor="@color/black" />
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/usernameUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tên đăng nhập"
+            app:met_baseColor="@color/black"
+            app:met_clearButton="true"
+            app:met_floatingLabel="highlight"
+            app:met_iconLeft="@drawable/email"
+            app:met_primaryColor="@color/black" />
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/passwordUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mật khẩu"
+            app:met_baseColor="@color/black"
+            app:met_clearButton="true"
+            app:met_floatingLabel="highlight"
+            app:met_iconLeft="@drawable/email"
+            app:met_primaryColor="@color/black" />
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/addEmailUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email người dùng"
+            app:met_baseColor="@color/black"
+            app:met_clearButton="true"
+            app:met_floatingLabel="highlight"
+            app:met_iconLeft="@drawable/email"
+            app:met_primaryColor="@color/black" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/phoneUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Số điện thoại"
+            android:inputType="number"
+            app:met_baseColor="@color/black"
+            app:met_clearButton="true"
+            app:met_floatingLabel="highlight"
+            app:met_iconLeft="@drawable/smartphone"
+            app:met_primaryColor="@color/black" />
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/addressUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Địa chỉ"
+            android:inputType="text"
+            app:met_baseColor="@color/black"
+            app:met_clearButton="true"
+            app:met_floatingLabel="highlight"
+            app:met_iconLeft="@drawable/smartphone"
+            app:met_primaryColor="@color/black" />
+
+        <TextView
+            android:id="@+id/imageUserText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_add_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgprofile"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="508dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/btn_background"
+        android:text="Thêm người dùng"
+        android:textColor="#ffffff" />
+
+</RelativeLayout>

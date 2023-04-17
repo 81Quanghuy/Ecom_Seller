@@ -2,8 +2,6 @@ package com.example.ecom_seller.roomDatabase.Database;
 
 import androidx.room.TypeConverter;
 
-import com.example.ecom_seller.model.Store;
-
 import java.util.Date;
 
 public class Converters {

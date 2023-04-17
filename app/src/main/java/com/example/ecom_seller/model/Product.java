@@ -5,6 +5,9 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Entity(tableName = "Product")
 public class Product implements Serializable {
@@ -19,11 +22,12 @@ public class Product implements Serializable {
     private Integer sold;
     private Boolean isselling;
     private String listimage;
-    private String categoryId;
-    private Integer rating;
+
+    private Category category;
+    private Double rating;
     private String createat;
     private String updateat;
-
+    private String barcode;
     public String getCreateat() {
         return createat;
     }
@@ -40,13 +44,12 @@ public class Product implements Serializable {
         this.updateat = updateat;
     }
 
-    private String barcode;
-    public String getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
+    public void setCategoryId(Category category) {
+        this.category = category;
     }
 
     public String getBarcode() {
@@ -110,11 +113,25 @@ public class Product implements Serializable {
         this.listimage = listimage;
     }
 
-    public Integer getRating() {
+    public Double getRating() {
         return rating;
     }
-    public void setRating(Integer rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 
+
+
+    public List<Photo> getListPhoto() {
+
+        String listimg = getListimage();
+        List<String> photos = Arrays.asList(listimg.split(","));
+        List<Photo> photoList = new ArrayList<>();
+        for(String w:photos){
+            Photo photo = new Photo(w);
+            photoList.add(photo);
+        }
+        return photoList;
+
+    }
 }

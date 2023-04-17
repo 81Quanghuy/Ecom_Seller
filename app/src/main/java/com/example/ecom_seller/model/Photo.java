@@ -1,17 +1,19 @@
 package com.example.ecom_seller.model;
 
-public class Photo {
-    private int resourcesId;
+import java.io.Serializable;
 
-    public Photo(int resourcesId) {
-        this.resourcesId = resourcesId;
+public class Photo implements Serializable {
+    private String resources;
+
+    public Photo(String resources) {
+        this.resources = resources;
     }
 
-    public int getResourcesId() {
-        return resourcesId;
+    public String getResources() {
+        return resources;
     }
 
-    public void setResourcesId(int resourcesId) {
-        this.resourcesId = resourcesId;
+    public void setResources(String resources) {
+        this.resources = resources;
     }
 }

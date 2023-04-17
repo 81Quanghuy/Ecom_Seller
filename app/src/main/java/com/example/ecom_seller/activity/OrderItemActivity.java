@@ -1,12 +1,20 @@
 package com.example.ecom_seller.activity;
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+
+import com.example.ecom_seller.R;
+import com.example.ecom_seller.adapter.OrderAdapter;
+import com.example.ecom_seller.adapter.OrderItemAdapter;
+import com.example.ecom_seller.adapter.UserAdapter;
+import com.example.ecom_seller.api.APIService;
+import com.example.ecom_seller.model.OrderItem;
 
 import java.util.List;
 
@@ -15,52 +23,51 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class OrderItemActivity extends AppCompatActivity {
-    RecyclerView rcProduct;
 
-//    LastProductAdapter productAdapter;
-//
-//    List<Product> productList;
-
-    ImageView btnBack;
-
+    String id;
+    OrderItemAdapter orderItemAdapter;
+    RecyclerView rcOrderItem;
+    List<OrderItem> listOrderItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_category);
-//        rcProduct = findViewById(R.id.rc_product);
-//        btnBack = findViewById(R.id.btn_back_to_home);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-       // getProducts();
+        setContentView(R.layout.activity_order_item);
+        AnhXa();
     }
 
-//    private void getProducts() {
-//        APIService.apiService.getProducts().enqueue(new Callback<List<Product>>() {
-//            @Override
-//            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-//                if(response.isSuccessful()){
-//                    productList = response.body();
-//                    productAdapter = new LastProductAdapter(CategoryActivity.this,productList);
-//                    rcProduct.setHasFixedSize(true);
-//                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(CategoryActivity.this,3);
-//                    rcProduct.setLayoutManager(layoutManager);
-//                    rcProduct.setAdapter(productAdapter);
-//                    productAdapter.notifyDataSetChanged();
-//                }
-//                else {
-//                    int statusCode = response.code();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Product>> call, Throwable t) {
-//
-//            }
-//        });
-//    }
+    private void AnhXa() {
+        rcOrderItem = findViewById(R.id.rc_OrderItemList);
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        id = bundle.getString("OrderId");
+        Log.e("OrderId",id.toString());
+
+        if(id != null){
+            getOrderItem(id);
+        }
+    }
+
+    private void getOrderItem(String id) {
+        APIService.apiService.getOrderItemList(id).enqueue(new Callback<List<OrderItem>>() {
+            @Override
+            public void onResponse(Call<List<OrderItem>> call, Response<List<OrderItem>> response) {
+                if(response.isSuccessful()){
+                    listOrderItem = response.body();
+                    orderItemAdapter = new OrderItemAdapter(OrderItemActivity.this, listOrderItem);
+                    rcOrderItem.setHasFixedSize(true);
+                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(OrderItemActivity.this,2);
+                    rcOrderItem.setLayoutManager(layoutManager);
+                    rcOrderItem.setAdapter(orderItemAdapter);
+                    orderItemAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<OrderItem>> call, Throwable t) {
+
+            }
+        });
+    }
 }

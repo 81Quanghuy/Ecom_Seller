@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.example.ecom_seller.fragment.AccountFragment;
 import com.example.ecom_seller.fragment.HomeFragment;
-import com.example.ecom_seller.fragment.MessageFragment;
+import com.example.ecom_seller.fragment.ProductFragment;
 import com.example.ecom_seller.fragment.OrderFragment;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
@@ -23,7 +23,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             case 0 :
                 return new HomeFragment();
             case 1:
-                return new MessageFragment();
+                return new ProductFragment();
             case 2:
                 return new OrderFragment();
             case 3:

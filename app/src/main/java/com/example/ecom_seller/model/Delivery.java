@@ -5,22 +5,28 @@ import java.util.Date;
 
 public class Delivery implements Serializable {
     private String id;
-    private String name;
-    private Float price;
     private String desciption;
     private Date createat;
     private Date updateat;
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Delivery() {
     }
 
-    public Delivery(String id, String name, Float price, String desciption, Date createat, Date updateat) {
+    public Delivery(String id, String desciption, Date createat, Date updateat,User user) {
         this.id = id;
-        this.name = name;
-        this.price = price;
         this.desciption = desciption;
         this.createat = createat;
         this.updateat = updateat;
+        this.user = user;
     }
 
     public String getId() {
@@ -29,22 +35,6 @@ public class Delivery implements Serializable {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Float getPrice() {
-        return price;
-    }
-
-    public void setPrice(Float price) {
-        this.price = price;
     }
 
     public String getDesciption() {

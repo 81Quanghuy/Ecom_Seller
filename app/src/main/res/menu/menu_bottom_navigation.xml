@@ -6,18 +6,18 @@
         android:icon="@drawable/home">
     </item>
     <item android:id="@+id/action_live"
-        android:title="@string/action_message"
-        android:icon="@drawable/facebook_messenger">
+        android:title="@string/action_product"
+        android:icon="@drawable/product_icon">
     </item>
 
     <item android:id="@+id/action_notification"
-        android:title="@string/action_cart"
+        android:title="@string/action_Order"
         android:icon="@drawable/cart">
     </item>
 
     <item android:id="@+id/action_account"
         android:title="@string/action_account"
-        android:icon="@drawable/account">
+        android:icon="@drawable/acc_manager">
     </item>
 
 </menu>
