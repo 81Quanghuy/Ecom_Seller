@@ -122,7 +122,7 @@ public class AddUserActivity extends AppCompatActivity {
         address = findViewById(R.id.addressUser);
         phone = findViewById(R.id.phoneUser);
         addUser = findViewById(R.id.btn_add_profile);
-        imageUserText = findViewById(R.id.imageUserText);
+        imageUserText = findViewById(R.id.imageAddUserText);
         imageUserText.setVisibility(View.INVISIBLE);
         email = findViewById(R.id.addEmailUser);
         mProgressDialog = new ProgressDialog(this);

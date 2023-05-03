@@ -23,6 +23,7 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,9 +50,10 @@ import retrofit2.Response;
 public class EditProfileActivity extends AppCompatActivity {
     ImageView btnBackAccount;
     String id;
-    TextView email,name,editname, phone,address,password;
+    Boolean isActive;
+    EditText email,name, phone,address,password;
 
-    AppCompatButton btnCapNhat,btnDelete;
+    AppCompatButton btnCapNhat,btnDelete,btnUnActive;
     TextView image;
     ImageView imgProfle;
 
@@ -119,6 +121,13 @@ public class EditProfileActivity extends AppCompatActivity {
                 DeleteAccount(user);
             }
         });
+        btnUnActive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mProgressDialog.show();
+                UnActiveAccount(user);
+            }
+        });
         imgProfle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,6 +136,25 @@ public class EditProfileActivity extends AppCompatActivity {
         });
     }
 
+    private void UnActiveAccount(User user){
+        APIService.apiService.ToggleActiveUserById(user.getId()).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.isSuccessful()){
+                    mProgressDialog.dismiss();
+                    finish();
+                    Toast.makeText(getApplicationContext(), "Thành Công", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                mProgressDialog.dismiss();
+                Toast.makeText(getApplicationContext(), "Thất Bại", Toast.LENGTH_LONG).show();
+
+            }
+        });
+    }
     private void DeleteAccount(User user) {
         APIService.apiService.DeleteUserById(user.getId()).enqueue(new Callback<String>() {
             @Override
@@ -134,12 +162,14 @@ public class EditProfileActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     mProgressDialog.dismiss();
                     finish();
+                    Toast.makeText(getApplicationContext(), "Thành Công", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 mProgressDialog.dismiss();
+                Toast.makeText(getApplicationContext(), "Thất Bại", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -150,7 +180,7 @@ public class EditProfileActivity extends AppCompatActivity {
             user.setAvatar(image.getText().toString());
         }
 
-        user.setFullName(editname.getText().toString());
+        user.setFullName(name.getText().toString());
         user.setPassword(password.getText().toString());
         user.setPhone(phone.getText().toString());
         user.setAddress(address.getText().toString());
@@ -163,17 +193,16 @@ public class EditProfileActivity extends AppCompatActivity {
         //init progess
         mProgressDialog = new ProgressDialog(this );
         mProgressDialog.setMessage("Vui lòng đợi ...");
-        btnBackAccount = findViewById(R.id.btnBackAccount);
-        imgProfle = findViewById(R.id.img_user_profile);
-//        btnLogOut = findViewById(R.id.btnLogOut);
+        btnBackAccount = findViewById(R.id.btnBackAccount1);
+        btnUnActive =findViewById(R.id.btn_unActive_account);
+        imgProfle = findViewById(R.id.profilepic);
 
-        name = findViewById(R.id.textView7);
-        email = findViewById(R.id.editTextMail);
-        editname = findViewById(R.id.edtName);
-        phone = findViewById(R.id.edtPhone);
-        address = findViewById(R.id.edtAddress);
-        password =findViewById(R.id.edtPass);
-        image =findViewById(R.id.testUpload);
+        name = findViewById(R.id.fullname);
+        email = findViewById(R.id.addEmailUser);
+        phone = findViewById(R.id.phoneUser);
+        address = findViewById(R.id.addressUser);
+        password =findViewById(R.id.passwordUser);
+        image =findViewById(R.id.imageUserText);
         image.setVisibility(View.INVISIBLE);
         btnDelete = findViewById(R.id.btn_delete_account);
 
@@ -183,21 +212,29 @@ private void UploadData(){
 
     Intent intent = getIntent();
     Bundle bundle = intent.getExtras();
-    id = bundle.getString("idUser");
-    Log.e("idUser",id.toString());
-    if(id != null){
+    if (bundle != null) {
+        id = bundle.getString("idUser");
         getUserById(id);
     }
     else{
+        btnDelete.setVisibility(View.INVISIBLE);
+        btnUnActive.setVisibility(View.INVISIBLE);
         user = UserDatabase.getInstance(getApplicationContext()).usersDao().getAll().get(0);
         Glide.with(getApplicationContext()).load(user.getAvatar()).into(imgProfle);
         image.setText(user.getAvatar());
         name.setText(user.getFullName());
         email.setText(user.getEmail());
-        editname.setText(user.getFullName());
         phone.setText(user.getPhone());
         address.setText(user.getAddress());
         password.setText(user.getPassword());
+        isActive = user.getActive();
+        if(isActive){
+            btnUnActive.setText("Tắt hoạt động");
+        }
+        else{
+            btnUnActive.setText("Bật hoạt động");
+        }
+
     }
 
 
@@ -215,10 +252,16 @@ private void UploadData(){
                     image.setText(user.getAvatar());
                     name.setText(user.getFullName());
                     email.setText(user.getEmail());
-                    editname.setText(user.getFullName());
                     phone.setText(user.getPhone());
                     address.setText(user.getAddress());
                     password.setText(user.getPassword());
+                    isActive = user.getActive();
+                    if(isActive){
+                        btnUnActive.setText("Tắt hoạt động");
+                    }
+                    else{
+                        btnUnActive.setText("Bật hoạt động");
+                    }
                 }
 
             }

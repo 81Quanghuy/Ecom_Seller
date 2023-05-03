@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical"
-    tools:context=".activity.AddUserActivity">
+    tools:context=".activity.CategoryActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
         android:background="@drawable/top_bar">
 
         <ImageView
-            android:id="@+id/btnBackAccount"
+            android:id="@+id/btnBackCate"
             android:layout_width="40dp"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -28,11 +28,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Thêm tài khoản"
+            android:text="Quản lý loại mặt hàng"
             android:textColor="#ffffff"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnBackAccount"
+            app:layout_constraintStart_toEndOf="@+id/btnBackCate"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -45,7 +45,7 @@
         android:padding="10dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profilepic"
+            android:id="@+id/imageShowCate"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:src="@drawable/product"
@@ -53,11 +53,11 @@
 
 
         <ImageView
-            android:id="@+id/changeprofilepic"
+            android:id="@+id/imgUpdateCateimage"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_alignRight="@+id/profilepic"
-            android:layout_alignBottom="@+id/profilepic"
+            android:layout_alignRight="@+id/imageShowCate"
+            android:layout_alignBottom="@+id/imageShowCate"
             android:elevation="4dp"
             android:src="@drawable/uploadpicdark" />
 
@@ -72,96 +72,65 @@
         android:padding="10dp">
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/fullname"
+            android:id="@+id/namecate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Tên người dùng"
+            android:hint="Tên mặt hàng"
             app:met_baseColor="@color/black"
             app:met_clearButton="true"
             app:met_floatingLabel="highlight"
             app:met_iconLeft="@drawable/profile"
             app:met_primaryColor="@color/black" />
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/usernameUser"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Tên đăng nhập"
-            app:met_baseColor="@color/black"
-            app:met_clearButton="true"
-            app:met_floatingLabel="highlight"
-            app:met_iconLeft="@drawable/email"
-            app:met_primaryColor="@color/black" />
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/passwordUser"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Mật khẩu"
-            app:met_baseColor="@color/black"
-            app:met_clearButton="true"
-            app:met_floatingLabel="highlight"
-            app:met_iconLeft="@drawable/email"
-            app:met_primaryColor="@color/black" />
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/addEmailUser"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Email người dùng"
-            app:met_baseColor="@color/black"
-            app:met_clearButton="true"
-            app:met_floatingLabel="highlight"
-            app:met_iconLeft="@drawable/email"
-            app:met_primaryColor="@color/black" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/phoneUser"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Số điện thoại"
-            android:inputType="number"
-            app:met_baseColor="@color/black"
-            app:met_clearButton="true"
-            app:met_floatingLabel="highlight"
-            app:met_iconLeft="@drawable/smartphone"
-            app:met_primaryColor="@color/black" />
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/addressUser"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Địa chỉ"
-            android:inputType="text"
-            app:met_baseColor="@color/black"
-            app:met_clearButton="true"
-            app:met_floatingLabel="highlight"
-            app:met_iconLeft="@drawable/smartphone"
-            app:met_primaryColor="@color/black" />
 
         <TextView
-            android:id="@+id/imageAddUserText"
+            android:id="@+id/imageCateUserText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""/>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/idCategoryText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
-
-        </LinearLayout>
+            android:text=""/>
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_add_profile"
+        android:id="@+id/btn_add_cate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/imgprofile"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="508dp"
+        android:layout_marginTop="400dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/btn_background"
-        android:text="Thêm người dùng"
+        android:text="Thêm mặt hàng"
         android:textColor="#ffffff" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_add_cate"
+        android:weightSum="2"
+        android:orientation="horizontal">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_delete_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="6dp"
+            android:background="@drawable/bg_boder"
+            android:text="Xóa mặt hàng"
+            android:textColor="#000000" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_motifycategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_background"
+            android:layout_weight="1"
+            android:layout_margin="6dp"
+            android:text="Chỉnh sửa mặt hàng"
+            android:textColor="#ffffff" />
+    </LinearLayout>
 
 </RelativeLayout>

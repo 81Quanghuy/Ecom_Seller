@@ -39,9 +39,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
         Order order = array.get(position);
         if(order != null){
             holder.id = order.getId();
+            holder.Status =order.getStatusOrder().toString();
         holder.address.setText(order.getAddress());
         holder.phone.setText(order.getPhone());
         holder.nameUser.setText(order.getUser().getFullName());
+
         }
     }
 
@@ -51,17 +53,19 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
     }
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView address,phone,nameUser;
-        private String id;
+        private String id,Status;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             address = (TextView) itemView.findViewById(R.id.tvNameAddress);
             phone = (TextView) itemView.findViewById(R.id.tvNamPhone);
             nameUser =(TextView) itemView.findViewById(R.id.tvNameNameUser);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Bundle bundle = new Bundle();
                     bundle.putString("OrderId", id);
+                    bundle.putString("Status", Status);
                     Intent intent = new Intent(context, OrderItemActivity.class);
                     intent.putExtras(bundle);
                     context.startActivity(intent);

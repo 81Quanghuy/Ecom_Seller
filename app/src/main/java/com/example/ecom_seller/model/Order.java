@@ -9,7 +9,7 @@ public class Order implements Serializable {
     private Delivery delivery;
     private String address;
     private String phone;
-    private String status; // Trang thai don hang
+    private StatusOrder statusOrder; // Trang thai don hang
     private Float price;
     private Date createat;
     private Date updateat;
@@ -18,13 +18,13 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public Order(String id, User user,Delivery delivery, String address, String phone, String status, Float price, Date createat, Date updateat, Boolean isactive) {
+    public Order(String id, User user,Delivery delivery, String address, String phone, StatusOrder status, Float price, Date createat, Date updateat, Boolean isactive) {
         this.id = id;
         this.user = user;
         this.delivery = delivery;
         this.address = address;
         this.phone = phone;
-        this.status = status;
+        this.statusOrder = status;
         this.price = price;
         this.createat = createat;
         this.updateat = updateat;
@@ -33,6 +33,14 @@ public class Order implements Serializable {
 
     public String getId() {
         return id;
+    }
+
+    public StatusOrder getStatusOrder() {
+        return statusOrder;
+    }
+
+    public void setStatusOrder(StatusOrder statusOrder) {
+        this.statusOrder = statusOrder;
     }
 
     public void setId(String id) {
@@ -69,14 +77,6 @@ public class Order implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public Float getPrice() {

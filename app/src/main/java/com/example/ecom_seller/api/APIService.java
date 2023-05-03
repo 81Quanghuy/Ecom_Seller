@@ -2,10 +2,12 @@ package com.example.ecom_seller.api;
 
 import androidx.room.Delete;
 
+import com.example.ecom_seller.model.Category;
 import com.example.ecom_seller.model.ImageData;
 import com.example.ecom_seller.model.Order;
 import com.example.ecom_seller.model.OrderItem;
 import com.example.ecom_seller.model.Product;
+import com.example.ecom_seller.model.Review;
 import com.example.ecom_seller.model.StatusOrder;
 import com.example.ecom_seller.model.User;
 import com.google.gson.Gson;
@@ -29,17 +31,38 @@ import retrofit2.http.Query;
 
 public interface APIService {
     //public static final String BASE_URL="http://app.iotstar.vn/shoppingapp/";
-    public static final String BASE_URL="https://ecomserver.up.railway.app/";
+    public static final String BASE_URL="https://ecomserver1.up.railway.app/";
     Gson gson = new GsonBuilder().setDateFormat("yyyy MM dd HH:mm:ss").create();
     APIService apiService = new Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build().create(APIService.class);
-
+    @POST("reviews/product")
+    Call<List<Review>> getReviewByProduct(@Body Product product);
     @POST("user/get")
     @FormUrlEncoded
     Call<User> loginWithLocal( @Field("username") String username, @Field("password") String password);
+    @GET("products/list")
+    Call<List<Product>> getProducts();
 
+    @POST("products/getId")
+    @FormUrlEncoded
+    Call<Product> ProductGetData(@Field("id") String id);
+    @GET("categories/list")
+    Call<List<Category>> getCategories();
+
+    @POST("categories/add")
+    Call<Category> addCate(@Body Category category);
+
+    @POST("categories/getById")
+    @FormUrlEncoded
+    Call<Category> getByid(@Field("id")String id);
+    @POST("categories/update")
+    Call<Category> UpdateCate(@Body Category category);
+
+    @POST("categories/delete")
+    @FormUrlEncoded
+    Call<Category> removeCate(@Field("id") String id);
     @POST("user/getUserById")
     @FormUrlEncoded
     Call<User> getUserById(@Field("id")String id);
@@ -47,6 +70,10 @@ public interface APIService {
     @POST("user/delete")
     @FormUrlEncoded
     Call<String> DeleteUserById(@Field("id")String id);
+
+    @POST("user/active-run")
+    @FormUrlEncoded
+    Call<String> ToggleActiveUserById(@Field("id")String id);
 
     @POST("user")
     @FormUrlEncoded
@@ -62,6 +89,9 @@ public interface APIService {
     @POST("user/updateUser")
     Call<User> updateUser(@Body User user);
 
+    @POST("order/updateStatusAll")
+    @FormUrlEncoded
+    Call<List<Order>> updateStatusAll(@Field("status") StatusOrder Status,@Field("statusChange") StatusOrder statusChange);
     @POST("order/getList")
     @FormUrlEncoded
     Call<List<Order>> getOrderList(@Field("status") StatusOrder Status);
@@ -82,9 +112,16 @@ public interface APIService {
 
     @POST("/order/changeStatus")
     @FormUrlEncoded
-    Call<Order> changeStatus(@Field("id")String id,@Field("status") StatusOrder status);
+    Call<Order> changeStatuss(@Field("id")String id,@Field("status") StatusOrder status);
 
     @POST("order/delete")
     Call<String> deleteOrder(@Body Order order);
 
+    @POST("products/getId")
+    @FormUrlEncoded
+    Call<Product> getProductById(@Field("id") String id);
+
+    @POST("products/active")
+    @FormUrlEncoded
+    Call<Product> ToggeActive(@Field("id") String id,@Field("isselling") Boolean isselling);
 }

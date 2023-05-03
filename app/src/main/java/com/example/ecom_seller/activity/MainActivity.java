@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void setUpViewPager() {
+
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         mViewPager.setAdapter(viewPagerAdapter);
 

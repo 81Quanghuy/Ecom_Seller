@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="color_selected">#FF5722</color>
     <color name="bg_seller">#f0f1f3</color>
+    <color name="grey_light">#E0E0E0</color>
+    <color name="gen_black">#000000</color>
 </resources>

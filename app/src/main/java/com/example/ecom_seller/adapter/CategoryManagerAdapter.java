@@ -8,42 +8,47 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.ecom_seller.R;
-import com.example.ecom_seller.activity.ProductDetailActivity;
-import com.example.ecom_seller.model.OrderItem;
+import com.example.ecom_seller.activity.CategoryActivity;
+import com.example.ecom_seller.activity.OrderItemActivity;
+import com.example.ecom_seller.model.Category;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 
-public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.MyViewHolder>{
+public class CategoryManagerAdapter extends RecyclerView.Adapter<CategoryManagerAdapter.MyViewHolder> {
 
     Context context;
-    List<OrderItem> array;
+    List<Category> array;
 
-    public OrderItemAdapter(Context context, List<OrderItem> array) {
+
+    public CategoryManagerAdapter(Context context, List<Category> array) {
         this.context = context;
         this.array =array;
     }
     @NonNull
     @Override
-    public OrderItemAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_order_product,null);
-        MyViewHolder myViewHolder = new OrderItemAdapter.MyViewHolder(view);
+                .inflate(R.layout.item_category_manager,null);
+        MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull OrderItemAdapter.MyViewHolder holder, int position) {
-        OrderItem orderitem = array.get(position);
-        holder.id= orderitem.getProduct().getId();
-        holder.tenSp.setText(orderitem.getProduct().getName());
-        Glide.with(context).load(orderitem.getProduct().getListPhoto().get(0).getResources()).into(holder.images);
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        Category category = array.get(position);
+        if(category!= null){
+            holder.id = category.getId();
+            holder.tenSp.setText(category.getName());
+            Glide.with(context).load(category.getImage()).into(holder.images);
+        }
+
     }
 
     @Override
@@ -55,24 +60,26 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.MyVi
         public ImageView images;
         public TextView tenSp;
 
-        public  String id;
+        String id;
+
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            images = (ImageView) itemView.findViewById(R.id.image_product);
+            tenSp = (TextView) itemView.findViewById(R.id.tvNameCategory);
 
-            images = (ImageView) itemView.findViewById(R.id.imgProduct);
-            tenSp = (TextView) itemView.findViewById(R.id.tvTenSp);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     Bundle bundle = new Bundle();
-                    bundle.putString("ProductId", id);
-                    Intent intent = new Intent(context, ProductDetailActivity.class);
+                    bundle.putString("CateId", id);
+                    Intent intent = new Intent(context, CategoryActivity.class);
                     intent.putExtras(bundle);
                     context.startActivity(intent);
+                    
                 }
             });
         }
     }
+
 }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:id="@+id/btnAddCate"
+        android:background="@drawable/btn_background"
+        android:text="Thêm mặt hàng"
+        android:textColor="#ffffff"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="6dp"
+        android:textSize="16dp"
+        android:layout_marginBottom="16dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/btnAddCate">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rc_category"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+</RelativeLayout>

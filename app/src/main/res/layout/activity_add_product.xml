@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical"
-    tools:context=".activity.AddUserActivity">
+    tools:context=".activity.AddProductActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
         android:background="@drawable/top_bar">
 
         <ImageView
-            android:id="@+id/btnBackAccount"
+            android:id="@+id/btnBackAccountProduct"
             android:layout_width="40dp"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -28,84 +28,59 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Thêm tài khoản"
+            android:text="Thêm sản phẩm"
             android:textColor="#ffffff"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnBackAccount"
+            app:layout_constraintStart_toEndOf="@+id/btnBackAccountProduct"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:id="@+id/imgprofile"
-        android:layout_below="@id/top_bar"
-        android:padding="10dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profilepic"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@drawable/product"
-            />
-
-
-        <ImageView
-            android:id="@+id/changeprofilepic"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignRight="@+id/profilepic"
-            android:layout_alignBottom="@+id/profilepic"
-            android:elevation="4dp"
-            android:src="@drawable/uploadpicdark" />
-
-    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:layout_below="@id/imgprofile"
+        android:layout_below="@+id/top_bar"
         android:orientation="vertical"
         android:padding="10dp">
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/fullname"
+            android:id="@+id/nameProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Tên người dùng"
+            android:hint="Tên sản phẩm"
             app:met_baseColor="@color/black"
             app:met_clearButton="true"
             app:met_floatingLabel="highlight"
             app:met_iconLeft="@drawable/profile"
             app:met_primaryColor="@color/black" />
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/usernameUser"
+            android:id="@+id/priceNoSaleProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Tên đăng nhập"
+            android:hint="Giá niêm yết"
             app:met_baseColor="@color/black"
             app:met_clearButton="true"
             app:met_floatingLabel="highlight"
             app:met_iconLeft="@drawable/email"
             app:met_primaryColor="@color/black" />
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/passwordUser"
+            android:id="@+id/PriceSaleProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Mật khẩu"
+            android:hint="Giá khuyến mãi"
             app:met_baseColor="@color/black"
             app:met_clearButton="true"
             app:met_floatingLabel="highlight"
             app:met_iconLeft="@drawable/email"
             app:met_primaryColor="@color/black" />
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/addEmailUser"
+            android:id="@+id/DesProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email người dùng"
+            android:hint="Mô tả sản phẩm"
             app:met_baseColor="@color/black"
             app:met_clearButton="true"
             app:met_floatingLabel="highlight"
@@ -113,22 +88,11 @@
             app:met_primaryColor="@color/black" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/phoneUser"
+            android:id="@+id/QuantityProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Số điện thoại"
+            android:hint="Số lượng sản phẩm nhập"
             android:inputType="number"
-            app:met_baseColor="@color/black"
-            app:met_clearButton="true"
-            app:met_floatingLabel="highlight"
-            app:met_iconLeft="@drawable/smartphone"
-            app:met_primaryColor="@color/black" />
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/addressUser"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Địa chỉ"
-            android:inputType="text"
             app:met_baseColor="@color/black"
             app:met_clearButton="true"
             app:met_floatingLabel="highlight"
@@ -136,7 +100,7 @@
             app:met_primaryColor="@color/black" />
 
         <TextView
-            android:id="@+id/imageAddUserText"
+            android:id="@+id/imageAddProductText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""/>
@@ -151,17 +115,35 @@
         </LinearLayout>
     </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_add_profile"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/imgprofile"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="508dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/btn_background"
-        android:text="Thêm người dùng"
-        android:textColor="#ffffff" />
+        android:gravity="center"
+        android:layout_margin="12dp"
+        android:weightSum="2"
+android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        >
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_huy_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/bg_boder"
+            android:text="HUy"
+            android:textColor="#000000" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_product_cnt"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/btn_background"
+            android:text="Tiếp tục"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
 
 </RelativeLayout>
