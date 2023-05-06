@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Entity(tableName = "Product")
+@Entity(tableName = "product")
 public class Product implements Serializable {
     @PrimaryKey
     @NonNull
@@ -25,25 +25,7 @@ public class Product implements Serializable {
 
     private Category category;
     private Double rating;
-    private String createat;
-    private String updateat;
     private String barcode;
-    public String getCreateat() {
-        return createat;
-    }
-
-    public void setCreateat(String createat) {
-        this.createat = createat;
-    }
-
-    public String getUpdateat() {
-        return updateat;
-    }
-
-    public void setUpdateat(String updateat) {
-        this.updateat = updateat;
-    }
-
     public Category getCategory() {
         return category;
     }

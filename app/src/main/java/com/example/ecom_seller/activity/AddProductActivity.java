@@ -6,6 +6,8 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.app.Activity;
@@ -20,14 +22,19 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.ecom_seller.R;
+import com.example.ecom_seller.adapter.CategoryAdapter;
 import com.example.ecom_seller.api.APIService;
 import com.example.ecom_seller.model.Category;
 import com.example.ecom_seller.model.ImageData;
@@ -39,8 +46,10 @@ import com.example.ecom_seller.util.RealPathUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -53,9 +62,12 @@ public class AddProductActivity extends AppCompatActivity {
     ImageView btnBackAccountProduct;
     EditText nameProduct,priceNoSaleProduct,PriceSaleProduct,DesProduct,QuantityProduct;
     Button btn_huy_product, btn_product_cnt;
-
+    ArrayList<String> listCateName = new ArrayList<String>();
+    Spinner mySpinner;
+    Category entity;
+    List<Category> categories;
     Product product;
-    String id;
+    String id,category;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,13 +87,15 @@ public class AddProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 SaveData();
+                ProductDatabase.getInstance(AddProductActivity.this).productDao().insertProduct(SaveData());
                 Product product1 = ProductDatabase.getInstance(AddProductActivity.this).productDao().getAll().get(0);
+                Log.e("TAG","product Data: "+ ProductDatabase.getInstance(AddProductActivity.this).productDao().getAll().size());
                 Log.e("TAG","product name: "+ product1.getName());
                 Log.e("TAG","product des: "+ product1.getDesciption());
                 Log.e("TAG","product price: "+ product1.getPrice());
                 Log.e("TAG","product pricesale: "+ product1.getPromotionaprice());
                 Log.e("TAG","product quality: "+ product1.getQuantity());
-
+                Log.e("TAG","category" + product1.getCategory().getName());
                 Intent intent = new Intent(AddProductActivity.this, AddImageProduct.class);
                 startActivity(intent);
             }
@@ -112,27 +126,29 @@ public class AddProductActivity extends AppCompatActivity {
         {
             if(product == null){
                 product = new Product();
+                product.setId(UUID.randomUUID().toString().split("-")[0]);
+                id = product.getId();
             }
             else
             {
-                Log.e("TAG","id"+ id);
+                Log.e("TAG","id: "+ id);
 
                 product.setName(nameProduct.getText().toString().trim());
                 product.setDesciption(DesProduct.getText().toString().trim());
                 product.setPrice(Double.parseDouble(priceNoSaleProduct.getText().toString().trim()));
                 product.setPromotionaprice(Double.parseDouble(PriceSaleProduct.getText().toString().trim()));
                 product.setQuantity(Integer.parseInt(QuantityProduct.getText().toString().trim()));
+                Log.e("TAG", (String) mySpinner.getSelectedItem());
+                for (Category cate:categories ) {
+                    if(cate.getName().equals((String)mySpinner.getSelectedItem())){
+                        entity =cate;
+                        product.setCategory(entity);
+                        break;
+                    }
+                }
 
             }
         }
-        if(ProductDatabase.getInstance(AddProductActivity.this).productDao().getAll().size()==0){
-
-            ProductDatabase.getInstance(AddProductActivity.this).productDao().insertProduct(product);
-        }
-        else{
-            ProductDatabase.getInstance(AddProductActivity.this).productDao().updateProduct(product);
-        }
-
         return product;
     }
     private void AnhXa() {
@@ -144,6 +160,8 @@ public class AddProductActivity extends AppCompatActivity {
         DesProduct = findViewById(R.id.DesProduct);
         btn_huy_product = findViewById(R.id.btn_huy_product);
         btn_product_cnt = findViewById(R.id.btn_product_cnt);
+        mySpinner = findViewById(R.id.spiner_cate);
+        SpinerCategory();
         UploadData();
     }
 
@@ -168,14 +186,52 @@ public class AddProductActivity extends AppCompatActivity {
                         PriceSaleProduct.setText(String.valueOf(product.getPromotionaprice().toString()));
                         QuantityProduct.setText(String.valueOf(product.getQuantity()));
                         DesProduct.setText(product.getDesciption());
+                        category = product.getCategory().getName();
+                        int index = listCateName.indexOf(category);
+                        mySpinner.setSelection(index);
                     }
                 }
-
                 @Override
                 public void onFailure(Call<Product> call, Throwable t) {
 
                 }
             });
+        }
+
     }
-}
+    private void SpinerCategory() {
+        APIService.apiService.getCategories().enqueue(new Callback<List<Category>>() {
+            @Override
+            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+                if(response.isSuccessful()){
+                    categories = response.body();
+
+                    for (Category cate: categories) {
+                        listCateName.add(cate.getName());
+                    }
+                    ArrayAdapter arrayAdapter = new ArrayAdapter(AddProductActivity.this, android.R.layout.simple_spinner_item,listCateName);
+                    mySpinner.setAdapter(arrayAdapter);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Category>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Fail", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                category =(String) adapterView.getItemAtPosition(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                category =(String) adapterView.getItemAtPosition(0);
+                Toast.makeText(AddProductActivity.this, category, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }

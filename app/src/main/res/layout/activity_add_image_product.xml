@@ -1,9 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
     tools:context=".activity.AddImageProduct">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/top_bar"
+        android:background="@drawable/top_bar">
+
+        <ImageView
+            android:id="@+id/btnBackAddProduct"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/white_setting" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Hình ảnh sản phẩm"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnBackAddProduct"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/imgprofile"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="200dp"
+        android:layout_below="@id/top_bar"
+        android:padding="10dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imagePhoto"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/product"
+            />
+
+
+        <ImageView
+            android:id="@+id/changeprofilepic"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignRight="@+id/profilepic"
+            android:layout_alignBottom="@+id/profilepic"
+            android:elevation="4dp"
+            android:src="@drawable/uploadpicdark" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_margin="12dp"
+        android:layout_below="@+id/imgprofile"
+        android:weightSum="3"
+        android:layout_alignParentEnd="true"
+        android:orientation="horizontal"
+        >
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_pre_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/bg_boder"
+            android:text="HUy"
+            android:textColor="#000000" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_image_product_cnt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/btn_background"
+            android:text="Tiếp tục"
+            android:textColor="#ffffff" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_product_add_finish"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/bg_boder"
+            android:text="Kết thúc"
+            android:textColor="#000000" />
+    </LinearLayout>
+
+</RelativeLayout>

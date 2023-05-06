@@ -2,11 +2,13 @@ package com.example.ecom_seller.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,35 +17,46 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.ecom_seller.R;
 import com.example.ecom_seller.activity.ProductByCategory;
+import com.example.ecom_seller.api.APIService;
 import com.example.ecom_seller.fragment.ProductFragment;
 import com.example.ecom_seller.model.Category;
+import com.example.ecom_seller.model.Product;
 
 import java.util.List;
 
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder> {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-    private OnResetFragmentListener onResetFragmentListener;
+public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder>{
+
+    private static final int VIEW_TYPE_COUNT = 1; // Số lượng view type
     Context context;
     List<Category> array;
+    private OnItemClickListener listener;
 
     Category category;
 
     public CategoryAdapter(Context context, List<Category> array) {
         this.context = context;
         this.array =array;
-        
     }
-
-    public CategoryAdapter(Context context, List<Category> array,OnResetFragmentListener onResetFragmentListener) {
+    public CategoryAdapter(Context context, List<Category> array,OnItemClickListener listener) {
         this.context = context;
         this.array =array;
-        this.onResetFragmentListener = onResetFragmentListener;
+        this.listener = listener;
     }
+
+    public interface OnItemClickListener {
+        void onItemClick(int position,String nameCate);
+    }
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -52,10 +65,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
         MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
     }
-
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         category = array.get(position);
+
         holder.tenSp.setText(category.getName());
         Glide.with(context).load(category.getImage()).into(holder.images);
     }
@@ -65,13 +78,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
         return array == null ? 0 : array.size();
     }
 
-    public interface OnResetFragmentListener {
-        void onResetFragment();
-    }
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView images;
         public TextView tenSp;
+
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -82,8 +92,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
                 @Override
                 public void onClick(View view) {
                     Toast.makeText(context, "Bạn đã chọn category" + tenSp.getText().toString(), Toast.LENGTH_SHORT).show();
-                    // Tạo instance của Fragment bạn muốn mở
-                    onResetFragmentListener.onResetFragment();
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(position, tenSp.getText().toString().trim());
+                        }
+                    }
 
                 }
             });

@@ -44,13 +44,17 @@ public interface APIService {
     Call<User> loginWithLocal( @Field("username") String username, @Field("password") String password);
     @GET("products/list")
     Call<List<Product>> getProducts();
-
+    @POST("products/notify")
+    Call<Product> productNotify(@Body Product product);
     @POST("products/getId")
     @FormUrlEncoded
     Call<Product> ProductGetData(@Field("id") String id);
     @GET("categories/list")
     Call<List<Category>> getCategories();
 
+    @POST("products/categoryName")
+    @FormUrlEncoded
+    Call<List<Product>> ListProductByCate(@Field("name") String name);
     @POST("categories/add")
     Call<Category> addCate(@Body Category category);
 

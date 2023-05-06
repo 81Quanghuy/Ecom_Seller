@@ -368,8 +368,6 @@ public class CategoryActivity extends AppCompatActivity {
             }
             Log.e("TAG","nameCate"+ nameCategory);
             cate.setName(nameCategory);
-            cate.setUpdateat(null);
-            cate.setCreateat(null);
             cate.setIsdeleted(false);
 
         }
@@ -380,7 +378,7 @@ public class CategoryActivity extends AppCompatActivity {
             cate = UploadCate();
             if (cate != null) {
                 mProgressDialog.show();
-                Log.e("TAG",cate.getId()+"\n"+cate.getName()+"\n"+cate.getImage()+"\n"+cate.getCreateat()+"\n"+cate.getUpdateat()+"\n"+cate.getIsdeleted());
+                Log.e("TAG",cate.getId()+"\n"+cate.getName()+"\n"+cate.getImage()+"\n"+cate.getIsdeleted());
                 APIService.apiService.UpdateCate(cate).enqueue(new Callback<Category>() {
                     @Override
                     public void onResponse(Call<Category> call, Response<Category> response) {

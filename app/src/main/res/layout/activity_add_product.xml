@@ -61,6 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Giá niêm yết"
+            android:inputType="number"
             app:met_baseColor="@color/black"
             app:met_clearButton="true"
             app:met_floatingLabel="highlight"
@@ -71,6 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Giá khuyến mãi"
+            android:inputType="number"
             app:met_baseColor="@color/black"
             app:met_clearButton="true"
             app:met_floatingLabel="highlight"
@@ -98,6 +100,29 @@
             app:met_floatingLabel="highlight"
             app:met_iconLeft="@drawable/smartphone"
             app:met_primaryColor="@color/black" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:weightSum="3">
+    <TextView
+        android:id="@+id/CategorySpinerText"
+        android:layout_width="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="10dp"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:layout_weight="2"
+        android:text="Loại mặt hàng"/>
+    <Spinner
+        android:id="@+id/spiner_cate"
+        android:layout_width="match_parent"
+        android:layout_marginTop="8dp"
+        android:textSize="16dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content" />
+</LinearLayout>
+
 
         <TextView
             android:id="@+id/imageAddProductText"
