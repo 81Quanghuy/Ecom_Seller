@@ -2,55 +2,108 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/btnSanPham"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:background="#ffffff">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="180dp"
-        android:layout_height="match_parent"
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/bg_background1"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tvTenSp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:singleLine="true"
-            android:text="Nước Tẩy Trang L'Oreal"
-            android:textColor="#000"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgProduct"
-            tools:ignore="MissingConstraints" />
-
         <ImageView
-            android:id="@+id/imgProduct"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="7dp"
-            android:background="@drawable/bg_item_background"
-            android:scaleType="fitXY"
-            app:layout_constraintBottom_toTopOf="@+id/tvTenSp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/background_primary" />
+            android:id="@+id/imgOrder"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="8dp"
+            android:src="@mipmap/ic_launcher" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:weightSum="3">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/tvNameProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|left"
+                    android:singleLine="true"
+                    android:text="30013222222212313232212131231231000Đ"
+                    android:textColor="#000"
+                    tools:ignore="MissingConstraints" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="2dp"
+                    android:gravity="right"
+                    android:text="x" />
+
+                <TextView
+                    android:id="@+id/tvCountOrder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="right"
+                    android:text="132" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/PriceProductNoSale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="Ngày mua hàng: "
+                    android:layout_marginEnd="4dp"
+                    android:textColor="#000"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/PriceProductSale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="13"
+                    android:textColor="@color/primary_color"
+                    tools:ignore="MissingConstraints" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

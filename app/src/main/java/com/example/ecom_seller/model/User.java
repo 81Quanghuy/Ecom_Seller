@@ -13,7 +13,6 @@ public class User implements Serializable {
     @PrimaryKey
     @NonNull
     private String  id;
-
     private String fullName;
     private String email;
     private String phone;
@@ -24,37 +23,6 @@ public class User implements Serializable {
     private String role;
     private Boolean isActive;
     private String resetpasswordtoken;
-
-//    private Date createat;
-//    private Date updaeat;
-
-   // private Store stores;
-
-//    public Date getCreateat() {
-//        return createat;
-//    }
-//
-//    public void setCreateat(Date createat) {
-//        this.createat = createat;
-//    }
-//
-//    public Date getUpdaeat() {
-//        return updaeat;
-//    }
-//
-//    public void setUpdaeat(Date updaeat) {
-//        this.updaeat = updaeat;
-//    }
-
-//    public Store getStores() {
-//        return stores;
-//    }
-//
-//    public void setStores(Store stores) {
-//        this.stores = stores;
-//    }
-
-
     public User() {
     }
 
@@ -70,9 +38,6 @@ public class User implements Serializable {
         this.role = role;
         this.isActive = isActive;
         this.resetpasswordtoken = resetpasswordtoken;
-        //this.createat = createat;
-        //this.updaeat = updaeat;
-       // this.stores = stores;
     }
 
     public User(String id, String username, String pass) {

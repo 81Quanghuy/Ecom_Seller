@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.ecom_seller.R;
 import com.example.ecom_seller.activity.OrderItemActivity;
 import com.example.ecom_seller.model.Order;
@@ -40,9 +42,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
         if(order != null){
             holder.id = order.getId();
             holder.Status =order.getStatusOrder().toString();
-        holder.address.setText(order.getAddress());
-        holder.phone.setText(order.getPhone());
-        holder.nameUser.setText(order.getUser().getFullName());
+        holder.price.setText(order.getPrice().toString());
+        holder.createAt.setText(order.getCreateat());
+        Glide.with(context).load(order.getUser().getAvatar()).into(holder.images);
 
         }
     }
@@ -52,13 +54,14 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
         return array == null ? 0 : array.size();
     }
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView address,phone,nameUser;
+        public TextView price,createAt;
+        public ImageView images;
         private String id,Status;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            address = (TextView) itemView.findViewById(R.id.tvNameAddress);
-            phone = (TextView) itemView.findViewById(R.id.tvNamPhone);
-            nameUser =(TextView) itemView.findViewById(R.id.tvNameNameUser);
+            price = (TextView) itemView.findViewById(R.id.tvPriceProduct);
+            createAt = (TextView) itemView.findViewById(R.id.tvDateOrder);
+            images =(ImageView) itemView.findViewById(R.id.imgOrderProduct);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

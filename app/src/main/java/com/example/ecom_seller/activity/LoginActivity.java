@@ -23,6 +23,7 @@ import com.example.ecom_seller.dataLocal.SharedPrefManager;
 import com.example.ecom_seller.api.APIService;
 import com.example.ecom_seller.model.User;
 import com.example.ecom_seller.roomDatabase.Database.UserDatabase;
+import com.example.ecom_seller.util.PasswordEncoder;
 
 import java.util.List;
 
@@ -68,7 +69,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private void GetUser() {
         String username = edtUsername.getText().toString().trim();
-        String password=  edtPassword.getText().toString().trim();
+        String password=  PasswordEncoder.encode(edtPassword.getText().toString().trim());
+        //String password = edtPassword.getText().toString().trim();
         if(TextUtils.isEmpty(username)){
             edtUsername.setError("Please enter your username");
             edtUsername.requestFocus();

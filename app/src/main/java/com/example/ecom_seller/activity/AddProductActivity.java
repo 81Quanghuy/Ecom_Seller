@@ -118,6 +118,36 @@ public class AddProductActivity extends AppCompatActivity {
     }
 
     private boolean CheckData() {
+        String name = nameProduct.getText().toString().trim();
+        String priceNoSale = priceNoSaleProduct.getText().toString().trim();
+        String priceSale = PriceSaleProduct.getText().toString().trim();
+        String des = DesProduct.getText().toString().trim();
+        String quantity = QuantityProduct.getText().toString().trim();
+        if (TextUtils.isEmpty(name)) {
+            nameProduct.setError("Vui lòng nhập tên sản phẩm");
+            nameProduct.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(priceNoSale)) {
+            priceNoSaleProduct.setError("Vui lòng nhập tên giá nhập hàng");
+            priceNoSaleProduct.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(priceSale)) {
+            PriceSaleProduct.setError("Vui lòng nhập giá bán hàng");
+            PriceSaleProduct.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(des)) {
+            DesProduct.setError("Vui lòng nhập mô tả sản phẩm");
+            DesProduct.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(quantity)) {
+            QuantityProduct.setError("Vui lòng nhập số lượng nhập hàng");
+            QuantityProduct.requestFocus();
+            return false;
+        }
         return true;
     }
     private Product SaveData() {

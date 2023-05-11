@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,7 +25,9 @@ import com.example.ecom_seller.adapter.LastProductAdapter;
 import com.example.ecom_seller.api.APIService;
 import com.example.ecom_seller.model.Category;
 import com.example.ecom_seller.model.Product;
+import com.example.ecom_seller.util.LinePagerIndicatorDecoration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -41,7 +44,7 @@ public class ProductFragment extends Fragment {
     List<Product> productList;
     RecyclerView rcProduct;
     //Hàm trả về view
-
+    androidx.appcompat.widget.SearchView searchView;
     View view;
     @Nullable
     @Override
@@ -73,7 +76,36 @@ public class ProductFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(),2);
         rcProduct.setLayoutManager(layoutManager);
         rcProduct.setAdapter(productAdapter);
-        productAdapter.notifyDataSetChanged();
+        rcProduct.addItemDecoration(new LinePagerIndicatorDecoration());
+        searchView =view.findViewById(R.id.searchView);
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterListener(newText);
+                return false;
+            }
+
+            private void filterListener(String newText) {
+                List<Product> list = new ArrayList<>();
+                for (Product product: productList){
+                    if(product.getName().toLowerCase().contains(newText.toLowerCase())){
+                        list.add(product);
+                    }
+                }
+                if(list.isEmpty()){
+                    Toast.makeText(getContext(), "Không có", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    productAdapter.setListenterList(list);
+                }
+            }
+        });
     }
 
     private void AnhXa() {
@@ -93,11 +125,40 @@ public class ProductFragment extends Fragment {
                     RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(),2);
                     rcProduct.setLayoutManager(layoutManager);
                     rcProduct.setAdapter(productAdapter);
-                    productAdapter.notifyDataSetChanged();
+                    rcProduct.addItemDecoration(new LinePagerIndicatorDecoration());
+                    searchView =view.findViewById(R.id.searchView);
+                    searchView.clearFocus();
+                    searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                        @Override
+                        public boolean onQueryTextSubmit(String query) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onQueryTextChange(String newText) {
+                            filterListener(newText);
+                            return false;
+                        }
+                    });
                     //Toast.makeText(getContext(), "Đã Load Product", Toast.LENGTH_LONG).show();
                 }
                 else {
                     int statusCode = response.code();
+                }
+            }
+
+            private void filterListener(String newText) {
+                List<Product> list = new ArrayList<>();
+                for (Product product: productList){
+                    if(product.getName().toLowerCase().contains(newText.toLowerCase())){
+                        list.add(product);
+                    }
+                }
+                if(list.isEmpty()){
+                    Toast.makeText(getContext(), "Không có", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    productAdapter.setListenterList(list);
                 }
             }
 

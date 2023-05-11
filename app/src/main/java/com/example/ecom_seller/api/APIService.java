@@ -39,7 +39,7 @@ public interface APIService {
             .build().create(APIService.class);
     @POST("reviews/product")
     Call<List<Review>> getReviewByProduct(@Body Product product);
-    @POST("user/get")
+    @POST("user/getRole")
     @FormUrlEncoded
     Call<User> loginWithLocal( @Field("username") String username, @Field("password") String password);
     @GET("products/list")

@@ -2,6 +2,7 @@ package com.example.ecom_seller.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +44,11 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.MyVi
         OrderItem orderitem = array.get(position);
         holder.id= orderitem.getProduct().getId();
         holder.tenSp.setText(orderitem.getProduct().getName());
+        holder.SalePrice.setText(String.format( "%,.0f",orderitem.getProduct().getPromotionaprice())+ "đ");
+
+        holder.count.setText(orderitem.getCount().toString());
+        holder.price.setText(orderitem.getProduct().getPrice().toString());
+        holder.price.setPaintFlags(holder.SalePrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         Glide.with(context).load(orderitem.getProduct().getListPhoto().get(0).getResources()).into(holder.images);
     }
 
@@ -53,15 +59,19 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.MyVi
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView images;
-        public TextView tenSp;
+        public TextView tenSp,count, price, SalePrice;
 
         public  String id;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            images = (ImageView) itemView.findViewById(R.id.imgProduct);
-            tenSp = (TextView) itemView.findViewById(R.id.tvTenSp);
+            images = (ImageView) itemView.findViewById(R.id.imgOrder);
+            tenSp = (TextView) itemView.findViewById(R.id.tvNameProduct);
+            count = (TextView) itemView.findViewById(R.id.tvCountOrder);
+            price = (TextView) itemView.findViewById(R.id.PriceProductNoSale);
+            SalePrice = (TextView) itemView.findViewById(R.id.PriceProductSale);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

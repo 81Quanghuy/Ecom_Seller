@@ -4,293 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_primary"
     android:orientation="vertical">
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@drawable/top_bar"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/btn_back_to_home"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/white_setting" />
+
+        <TextView
+            android:id="@+id/tvCategory"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layoutOrder"
-                android:layout_width="match_parent"
-                android:layout_height="50sp"
+            android:layout_marginStart="16dp"
+            android:text="Đơn Mua"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_back_to_home"
+            app:layout_constraintStart_toEndOf="@+id/btn_back_to_home"
+            app:layout_constraintTop_toTopOf="@+id/btn_back_to_home"
+            app:layout_constraintVertical_bias="0.454" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout_order"
+        android:background="@color/grey_light"
+        app:tabTextColor="@color/black"
+        app:tabSelectedTextColor="@color/black"
+        app:tabIndicatorColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager2_status_order"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
-                android:background="@drawable/white_bg_no_radius">
-
-                <TextView
-                    android:id="@+id/textQuanLyDonHang"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:text="QUẢN LÝ ĐƠN HÀNG"
-                    android:textColor="#000"
-                    android:textSize="17sp"
-                    android:textFontWeight="400"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_marginTop="20dp"
-                android:id="@+id/layoutOrderChoXacNhan"
-                android:layout_width="match_parent"
-                android:layout_height="140sp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-
-                android:background="@drawable/white_background">
-
-                <TextView
-                    android:id="@+id/DHChoXacNhan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:text="Đơn hàng chờ xác nhận"
-                    android:textColor="#000"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/detailChoXacNhan"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="7dp"
-                    android:layout_marginBottom="17dp"
-                    android:drawableEnd="@drawable/next_btn"
-                    android:gravity="center"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toTopOf="@+id/rc_orderChoXacNhan"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rc_orderChoXacNhan"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:orientation="horizontal"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/detailChoXacNhan"
-                    >
-
-                </androidx.recyclerview.widget.RecyclerView>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_marginTop="30dp"
-                android:id="@+id/layoutOrderDangGiao"
-                android:layout_width="match_parent"
-                android:layout_height="140sp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-
-                android:background="@drawable/white_background">
-
-                <TextView
-                    android:id="@+id/DHDangGiao"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:text="Đơn hàng đang được giao"
-                    android:textColor="#000"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/detalDangGiao"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="7dp"
-                    android:layout_marginBottom="17dp"
-                    android:drawableEnd="@drawable/next_btn"
-                    android:gravity="center"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toTopOf="@+id/rc_orderDangGiao"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rc_orderDangGiao"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:orientation="horizontal"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/detalDangGiao"
-                    >
-
-                </androidx.recyclerview.widget.RecyclerView>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_marginTop="30dp"
-                android:id="@+id/layoutOrderDaGiao"
-                android:layout_width="match_parent"
-                android:layout_height="140sp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-
-                android:background="@drawable/white_background">
-
-                <TextView
-                    android:id="@+id/DHDaGiao"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:text="Đơn hàng giao thành công"
-                    android:textColor="#000"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/detailDaGiao"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="7dp"
-                    android:layout_marginBottom="17dp"
-                    android:drawableEnd="@drawable/next_btn"
-                    android:gravity="center"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toTopOf="@+id/rc_orderDaGiao"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rc_orderDaGiao"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:orientation="horizontal"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/detailDaGiao"
-                    >
-
-                </androidx.recyclerview.widget.RecyclerView>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_marginTop="30dp"
-                android:id="@+id/layoutOrderHuy"
-                android:layout_width="match_parent"
-                android:layout_height="140sp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-
-                android:background="@drawable/white_background">
-
-                <TextView
-                    android:id="@+id/DHeHuy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:text="Đơn hàng bị hủy"
-                    android:textColor="#000"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/detailHuy"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="7dp"
-                    android:layout_marginBottom="17dp"
-                    android:drawableEnd="@drawable/next_btn"
-                    android:gravity="center"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toTopOf="@+id/rc_orderHuy"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rc_orderHuy"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:orientation="horizontal"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
-                </androidx.recyclerview.widget.RecyclerView>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_marginTop="30dp"
-                android:id="@+id/layoutOrderTuchoi"
-                android:layout_width="match_parent"
-                android:layout_height="140sp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="50dp"
-
-                android:background="@drawable/white_background">
-
-                <TextView
-                    android:id="@+id/DHetuChoi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:text="Đơn hàng bị từ chối"
-                    android:textColor="#000"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/detailTuChoi"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="7dp"
-                    android:layout_marginBottom="17dp"
-                    android:drawableEnd="@drawable/next_btn"
-                    android:gravity="center"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toTopOf="@+id/rc_orderTuchoi"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rc_orderTuchoi"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:orientation="horizontal"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
-
-                </androidx.recyclerview.widget.RecyclerView>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </LinearLayout>
-
-
-      </ScrollView>
 </LinearLayout>

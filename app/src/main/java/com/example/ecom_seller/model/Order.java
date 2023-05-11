@@ -6,22 +6,20 @@ import java.util.Date;
 public class Order implements Serializable {
     private String id;
     private User user;
-    private Delivery delivery;
     private String address;
     private String phone;
     private StatusOrder statusOrder; // Trang thai don hang
-    private Float price;
-    private Date createat;
-    private Date updateat;
+    private Double price;
+    private String createat;
+    private String updateat;
     private Boolean isactive;
 
     public Order() {
     }
 
-    public Order(String id, User user,Delivery delivery, String address, String phone, StatusOrder status, Float price, Date createat, Date updateat, Boolean isactive) {
+    public Order(String id, User user, String address, String phone, StatusOrder status, Double price, String createat, String updateat, Boolean isactive) {
         this.id = id;
         this.user = user;
-        this.delivery = delivery;
         this.address = address;
         this.phone = phone;
         this.statusOrder = status;
@@ -55,14 +53,6 @@ public class Order implements Serializable {
         this.user = user;
     }
 
-    public Delivery getDelivery() {
-        return delivery;
-    }
-
-    public void setDelivery(Delivery delivery) {
-        this.delivery = delivery;
-    }
-
     public String getAddress() {
         return address;
     }
@@ -79,27 +69,27 @@ public class Order implements Serializable {
         this.phone = phone;
     }
 
-    public Float getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public Date getCreateat() {
+    public String getCreateat() {
         return createat;
     }
 
-    public void setCreateat(Date createat) {
+    public void setCreateat(String createat) {
         this.createat = createat;
     }
 
-    public Date getUpdateat() {
+    public String getUpdateat() {
         return updateat;
     }
 
-    public void setUpdateat(Date updateat) {
+    public void setUpdateat(String updateat) {
         this.updateat = updateat;
     }
 

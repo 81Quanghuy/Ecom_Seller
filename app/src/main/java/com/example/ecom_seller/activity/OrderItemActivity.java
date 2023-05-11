@@ -129,7 +129,7 @@ public class OrderItemActivity extends AppCompatActivity {
                     listOrderItem = response.body();
                     orderItemAdapter = new OrderItemAdapter(OrderItemActivity.this, listOrderItem);
                     rcOrderItem.setHasFixedSize(true);
-                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(OrderItemActivity.this,2);
+                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(OrderItemActivity.this,1);
                     rcOrderItem.setLayoutManager(layoutManager);
                     rcOrderItem.setAdapter(orderItemAdapter);
                     orderItemAdapter.notifyDataSetChanged();

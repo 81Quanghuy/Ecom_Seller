@@ -34,6 +34,7 @@ import com.example.ecom_seller.api.APIService;
 import com.example.ecom_seller.model.ImageData;
 import com.example.ecom_seller.model.User;
 import com.example.ecom_seller.roomDatabase.Database.UserDatabase;
+import com.example.ecom_seller.util.PasswordEncoder;
 import com.example.ecom_seller.util.RealPathUtil;
 
 import java.io.ByteArrayOutputStream;
@@ -150,6 +151,7 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 mProgressDialog.dismiss();
+                finish();
                 Toast.makeText(getApplicationContext(), "Thất Bại", Toast.LENGTH_LONG).show();
 
             }
@@ -181,7 +183,12 @@ public class EditProfileActivity extends AppCompatActivity {
         }
 
         user.setFullName(name.getText().toString());
-        user.setPassword(password.getText().toString());
+        if(password.getText().toString().trim() != ""){
+            user.setPassword(PasswordEncoder.encode(password.getText().toString().trim()));
+        }
+        else {
+            user.setPassword(user.getPassword());
+        }
         user.setPhone(phone.getText().toString());
         user.setAddress(address.getText().toString());
         user.setEmail(email.getText().toString());
@@ -226,14 +233,7 @@ private void UploadData(){
         email.setText(user.getEmail());
         phone.setText(user.getPhone());
         address.setText(user.getAddress());
-        password.setText(user.getPassword());
-        isActive = user.getActive();
-        if(isActive){
-            btnUnActive.setText("Tắt hoạt động");
-        }
-        else{
-            btnUnActive.setText("Bật hoạt động");
-        }
+        //password.setText(user.getPassword());
 
     }
 
@@ -254,13 +254,15 @@ private void UploadData(){
                     email.setText(user.getEmail());
                     phone.setText(user.getPhone());
                     address.setText(user.getAddress());
-                    password.setText(user.getPassword());
+                    //password.setText("");
                     isActive = user.getActive();
                     if(isActive){
                         btnUnActive.setText("Tắt hoạt động");
+                        btnDelete.setVisibility(View.INVISIBLE);
                     }
                     else{
                         btnUnActive.setText("Bật hoạt động");
+                        btnCapNhat.setVisibility(View.INVISIBLE);
                     }
                 }
 

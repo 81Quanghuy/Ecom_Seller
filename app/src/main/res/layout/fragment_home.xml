@@ -112,8 +112,6 @@
                     android:id="@+id/orderAway_item3"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:weightSum="2"
@@ -138,7 +136,7 @@
                         android:textColor="#807f84"
                         android:drawableRight="@drawable/next_btn"
                         android:gravity="center|top"
-                        android:text="Visitors"
+                        android:text="Người dùng"
                         android:textSize="14dp" />
                 </LinearLayout>
                 <LinearLayout
@@ -191,25 +189,26 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="Order"
+                    android:text="Đơn hàng"
                     android:textColor="#000"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/textView"
+                <TextClock
+                    android:id="@+id/textClock"
+                    android:textColor="#807f84"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="56dp"
+                    android:layout_marginStart="100dp"
                     android:layout_marginTop="9dp"
                     android:drawableStart="@drawable/baseline_lock_clock_24"
                     android:gravity="center"
-                    android:text="02/04/2023"
-                    android:textColor="#807f84"
                     android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:format24Hour="HH:mm:ss"
+                    android:format12Hour="hh:mm:ss a" />
 
                 <TextView
                     android:id="@+id/textView2"
@@ -267,7 +266,7 @@
                             android:layout_weight="1"
                             android:drawableRight="@drawable/next_btn"
                             android:gravity="center"
-                            android:text="To Process"
+                            android:text="Chờ xác nhận"
                             android:textColor="#807f84"
                             android:textSize="14dp" />
                     </LinearLayout>
@@ -300,7 +299,7 @@
                             android:layout_weight="1"
                             android:drawableRight="@drawable/next_btn"
                             android:gravity="center"
-                            android:text="Shipping"
+                            android:text="Đang giao"
                             android:textColor="#807f84"
                             android:textSize="14dp" />
                     </LinearLayout>
@@ -332,7 +331,7 @@
                             android:layout_weight="1"
                             android:drawableRight="@drawable/next_btn"
                             android:gravity="center"
-                            android:text="Return"
+                            android:text="Đã giao"
                             android:textColor="#807f84"
                             android:textSize="14dp" />
                     </LinearLayout>
@@ -364,7 +363,7 @@
                             android:layout_weight="1"
                             android:drawableRight="@drawable/next_btn"
                             android:gravity="center"
-                            android:text="Review"
+                            android:text="Bị hủy"
                             android:textColor="#807f84"
                             android:textSize="14dp" />
                     </LinearLayout>
@@ -387,7 +386,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="Product"
+                    android:text="Sản phẩm"
                     android:textColor="#000"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -451,7 +450,7 @@
                             android:layout_weight="1"
                             android:drawableRight="@drawable/next_btn"
                             android:gravity="center"
-                            android:text="Is Active"
+                            android:text="Đang kinh doanh"
                             android:textColor="#807f84"
                             android:textSize="14dp" />
                     </LinearLayout>
@@ -484,7 +483,7 @@
                             android:layout_weight="1"
                             android:drawableRight="@drawable/next_btn"
                             android:gravity="center"
-                            android:text="Cancel"
+                            android:text="Tạm ngưng"
                             android:textColor="#807f84"
                             android:textSize="14dp" />
                     </LinearLayout>
@@ -516,7 +515,7 @@
                             android:layout_weight="1"
                             android:drawableRight="@drawable/next_btn"
                             android:gravity="center"
-                            android:text="Sold Out"
+                            android:text="Hết hàng"
                             android:textColor="#807f84"
                             android:textSize="14dp" />
                     </LinearLayout>
@@ -551,7 +550,7 @@
 
                         android:drawableStart="@drawable/add_icon"
                         android:gravity="center"
-                        android:text="Add Product"
+                        android:text="Thêm sản phẩm"
                         android:textColor="@color/purple_700"
                         android:textSize="14dp" />
                 </LinearLayout>
@@ -573,14 +572,14 @@
                     android:background="@drawable/white_background">
 
                     <TextView
-                        android:id="@+id/accSetting"
+                        android:id="@+id/productAnalyis"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:layout_weight="1"
                         android:drawableRight="@drawable/next_action"
                         android:gravity="center|start"
                         android:paddingStart="8dp"
-                        android:text="Finance"
+                        android:text="Phân tích sản phẩm bán "
                         android:textColor="#000000"
                         android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -602,14 +601,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <TextView
-                            android:id="@+id/analysis"
+                            android:id="@+id/orderAnalyis"
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
                             android:layout_weight="1"
                             android:drawableRight="@drawable/next_action"
                             android:gravity="center|start"
                             android:paddingStart="8dp"
-                            android:text="Data Analysis"
+                            android:text="Phân tích đơn hàng"
                             android:textColor="#000000"
                             android:textSize="14sp"
                             app:layout_constraintEnd_toEndOf="parent"

@@ -255,7 +255,6 @@ public class CategoryActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<ImageData> call, Throwable t) {
                     Log.d("TAG", t.getMessage());
-                    mProgressDialog.dismiss();
                     Toast.makeText(getApplicationContext(), "Lỗi khi up ảnh", Toast.LENGTH_LONG).show();
 
                 }
@@ -303,7 +302,7 @@ public class CategoryActivity extends AppCompatActivity {
     private void AddCate() {
 
         if(CheckCate()){
-
+            mProgressDialog.show();
             String strRealPath = RealPathUtil.getRealPath(this, mUri); //lấy đường dẫn thực
 
             Log.e("TAG", strRealPath);
@@ -316,8 +315,6 @@ public class CategoryActivity extends AppCompatActivity {
             Log.e("TAG","imageTextPart"+ partAvatar.toString());
             cate = UploadCate();
             if (cate != null) {
-
-                mProgressDialog.show();
                 Log.e("TAG","Catename: "+cate.getName());
                 APIService.apiService.addCate(cate).enqueue(new Callback<Category>() {
                     @Override

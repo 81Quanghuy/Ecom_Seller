@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.ecom_seller.R;
 import com.example.ecom_seller.activity.EditProfileActivity;
+import com.example.ecom_seller.model.Product;
 import com.example.ecom_seller.model.User;
 
 import java.util.List;
@@ -81,5 +82,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
                 }
             });
         }
+    }
+    public void setListenterList(List<User> iconModels){
+        this.users = iconModels;
+        notifyDataSetChanged();
     }
 }

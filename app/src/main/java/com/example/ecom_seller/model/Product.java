@@ -22,7 +22,6 @@ public class Product implements Serializable {
     private Integer sold;
     private Boolean isselling;
     private String listimage;
-
     private Category category;
     private Double rating;
     private String barcode;

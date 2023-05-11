@@ -98,7 +98,10 @@ public class LastProductAdapter extends RecyclerView.Adapter<LastProductAdapter.
 
         }
     }
-
+    public void setListenterList(List<Product> iconModels){
+        this.array = iconModels;
+        notifyDataSetChanged();
+    }
 
 
 }

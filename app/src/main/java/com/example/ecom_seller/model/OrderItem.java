@@ -8,16 +8,12 @@ public class OrderItem implements Serializable {
     private Order order;
     private Product product;
     private Integer count;
-    private Date createat;
-    private Date updateat;
 
-    public OrderItem(String id, Order order, Product product, Integer count, Date createat, Date updateat) {
+    public OrderItem(String id, Order order, Product product, Integer count) {
         this.id = id;
         this.order = order;
         this.product = product;
         this.count = count;
-        this.createat = createat;
-        this.updateat = updateat;
     }
 
     public OrderItem() {
@@ -55,19 +51,4 @@ public class OrderItem implements Serializable {
         this.count = count;
     }
 
-    public Date getCreateat() {
-        return createat;
-    }
-
-    public void setCreateat(Date createat) {
-        this.createat = createat;
-    }
-
-    public Date getUpdateat() {
-        return updateat;
-    }
-
-    public void setUpdateat(Date updateat) {
-        this.updateat = updateat;
-    }
 }

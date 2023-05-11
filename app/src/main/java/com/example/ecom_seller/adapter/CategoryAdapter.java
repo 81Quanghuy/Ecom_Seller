@@ -1,38 +1,21 @@
 package com.example.ecom_seller.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.database.DataSetObserver;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.ecom_seller.R;
-import com.example.ecom_seller.activity.ProductByCategory;
-import com.example.ecom_seller.api.APIService;
-import com.example.ecom_seller.fragment.ProductFragment;
 import com.example.ecom_seller.model.Category;
-import com.example.ecom_seller.model.Product;
 
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder>{
 

@@ -34,6 +34,7 @@ import com.example.ecom_seller.api.APIService;
 import com.example.ecom_seller.model.ImageData;
 import com.example.ecom_seller.model.User;
 import com.example.ecom_seller.roomDatabase.Database.UserDatabase;
+import com.example.ecom_seller.util.PasswordEncoder;
 import com.example.ecom_seller.util.RealPathUtil;
 
 import java.io.File;
@@ -274,7 +275,8 @@ public class AddUserActivity extends AppCompatActivity {
         User user = new User();
         String username12 = username.getText().toString().trim();
         String fullname12 = fullname.getText().toString().trim();
-        String pass = password.getText().toString().trim();
+        String pass = PasswordEncoder.encode(password.getText().toString().trim());
+
         String phone12 = phone.getText().toString().trim();
         String address12 = address.getText().toString().trim();
         String email12 = email.getText().toString().trim();

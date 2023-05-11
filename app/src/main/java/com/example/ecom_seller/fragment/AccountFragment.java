@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,8 +20,11 @@ import com.example.ecom_seller.R;
 import com.example.ecom_seller.activity.AddUserActivity;
 import com.example.ecom_seller.adapter.UserAdapter;
 import com.example.ecom_seller.api.APIService;
+import com.example.ecom_seller.model.Product;
 import com.example.ecom_seller.model.User;
+import com.example.ecom_seller.util.LinePagerIndicatorDecoration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -34,6 +38,7 @@ public class AccountFragment extends Fragment {
     UserAdapter userAdapter;
     RecyclerView rcUserActive,rcUserNoActive;
     TextView btnaddUser;
+    androidx.appcompat.widget.SearchView searchView;
     View view;
     //Hàm trả về view
     @Nullable
@@ -66,9 +71,36 @@ public class AccountFragment extends Fragment {
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
                     rcUserActive.setLayoutManager(layoutManager);
                     rcUserActive.setAdapter(userAdapter);
-                    userAdapter.notifyDataSetChanged();
+                    rcUserActive.addItemDecoration(new LinePagerIndicatorDecoration());
+                    searchView =view.findViewById(R.id.searchViewUser);
+                    searchView.clearFocus();
+                    searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                        @Override
+                        public boolean onQueryTextSubmit(String query) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onQueryTextChange(String newText) {
+                            List<User> list = new ArrayList<>();
+                            for (User user: userList){
+                                if(user.getFullName().toLowerCase().contains(newText.toLowerCase())){
+                                    list.add(user);
+                                }
+                            }
+                            if(list.isEmpty()){
+                                Toast.makeText(getContext(), "Không có", Toast.LENGTH_SHORT).show();
+                            }
+                            else{
+                                userAdapter.setListenterList(list);
+                            }
+                            return false;
+                        }
+                    });
                 }
             }
+
+
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
@@ -81,7 +113,7 @@ public class AccountFragment extends Fragment {
         APIService.apiService.getUsers(false).enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                if(response.isSuccessful()){
+                if(response.isSuccessful()) {
                     userList = response.body();
                     userAdapter = new UserAdapter(getContext(), userList);
                     rcUserNoActive.setHasFixedSize(true);
@@ -91,6 +123,7 @@ public class AccountFragment extends Fragment {
                     userAdapter.notifyDataSetChanged();
                 }
             }
+
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
