@@ -66,7 +66,7 @@ public class AddProductActivity extends AppCompatActivity {
     Spinner mySpinner;
     Category entity;
     List<Category> categories;
-    Product product;
+    Product product = new Product();
     String id,category;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,18 +86,21 @@ public class AddProductActivity extends AppCompatActivity {
         btn_product_cnt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SaveData();
-                ProductDatabase.getInstance(AddProductActivity.this).productDao().insertProduct(SaveData());
-                Product product1 = ProductDatabase.getInstance(AddProductActivity.this).productDao().getAll().get(0);
-                Log.e("TAG","product Data: "+ ProductDatabase.getInstance(AddProductActivity.this).productDao().getAll().size());
-                Log.e("TAG","product name: "+ product1.getName());
-                Log.e("TAG","product des: "+ product1.getDesciption());
-                Log.e("TAG","product price: "+ product1.getPrice());
-                Log.e("TAG","product pricesale: "+ product1.getPromotionaprice());
-                Log.e("TAG","product quality: "+ product1.getQuantity());
-                Log.e("TAG","category" + product1.getCategory().getName());
-                Intent intent = new Intent(AddProductActivity.this, AddImageProduct.class);
-                startActivity(intent);
+                if(CheckData()) {
+                    SaveData();
+                    ProductDatabase.getInstance(AddProductActivity.this).productDao().insertProduct(SaveData());
+                    Product product1 = ProductDatabase.getInstance(AddProductActivity.this).productDao().getAll().get(0);
+                    Log.e("TAG", "product Data: " + ProductDatabase.getInstance(AddProductActivity.this).productDao().getAll().size());
+                    Log.e("TAG", "product name: " + product1.getName());
+                    Log.e("TAG", "product des: " + product1.getDesciption());
+                    Log.e("TAG", "product price: " + product1.getPrice());
+                    Log.e("TAG", "product pricesale: " + product1.getPromotionaprice());
+                    Log.e("TAG", "product quality: " + product1.getQuantity());
+                    Log.e("TAG", "category" + product1.getCategory().getName());
+                    Log.e("TAG", "product database: "+ProductDatabase.getInstance(AddProductActivity.this).productDao().getAll().size() );
+                    Intent intent = new Intent(AddProductActivity.this, AddImageProduct.class);
+                    startActivity(intent);
+                }
             }
         });
         btnBackAccountProduct.setOnClickListener(new View.OnClickListener() {
@@ -114,6 +117,8 @@ public class AddProductActivity extends AppCompatActivity {
         finish();
     }
     private void DeleteDataLocal() {
+        Log.e("TAG", "product database: "+ProductDatabase.getInstance(AddProductActivity.this).productDao().getAll().size() );
+
         ProductDatabase.getInstance(AddProductActivity.this).productDao().deleteAll();
     }
 
@@ -128,13 +133,23 @@ public class AddProductActivity extends AppCompatActivity {
             nameProduct.requestFocus();
             return false;
         }
-        if (TextUtils.isEmpty(priceNoSale)) {
+        if (TextUtils.isEmpty(priceNoSale) ) {
             priceNoSaleProduct.setError("Vui lòng nhập tên giá nhập hàng");
+            priceNoSaleProduct.requestFocus();
+            return false;
+        }
+        if(Double.parseDouble(priceNoSale) <0){
+            priceNoSaleProduct.setError("Vui lòng nhập giá nhập hàng lớn hơn 0");
             priceNoSaleProduct.requestFocus();
             return false;
         }
         if (TextUtils.isEmpty(priceSale)) {
             PriceSaleProduct.setError("Vui lòng nhập giá bán hàng");
+            PriceSaleProduct.requestFocus();
+            return false;
+        }
+        if(Double.parseDouble(priceSale) <0){
+            PriceSaleProduct.setError("Vui lòng nhập giá bán hàng lớn hơn 0");
             PriceSaleProduct.requestFocus();
             return false;
         }
@@ -148,35 +163,30 @@ public class AddProductActivity extends AppCompatActivity {
             QuantityProduct.requestFocus();
             return false;
         }
+        if(Integer.parseInt(quantity) <0){
+            QuantityProduct.setError("Vui lòng nhập số lượng nhập hàng lớn hơn 0");
+            QuantityProduct.requestFocus();
+            return false;
+        }
         return true;
     }
     private Product SaveData() {
-
-        if(CheckData())
-        {
-            if(product == null){
-                product = new Product();
-                product.setId(UUID.randomUUID().toString().split("-")[0]);
-                id = product.getId();
-            }
-            else
-            {
-                Log.e("TAG","id: "+ id);
-
-                product.setName(nameProduct.getText().toString().trim());
-                product.setDesciption(DesProduct.getText().toString().trim());
-                product.setPrice(Double.parseDouble(priceNoSaleProduct.getText().toString().trim()));
-                product.setPromotionaprice(Double.parseDouble(PriceSaleProduct.getText().toString().trim()));
-                product.setQuantity(Integer.parseInt(QuantityProduct.getText().toString().trim()));
-                Log.e("TAG", (String) mySpinner.getSelectedItem());
-                for (Category cate:categories ) {
-                    if(cate.getName().equals((String)mySpinner.getSelectedItem())){
-                        entity =cate;
-                        product.setCategory(entity);
-                        break;
-                    }
-                }
-
+        if(product.getName() == null){
+            product.setId(UUID.randomUUID().toString().split("-")[0]);
+            id = product.getId();
+            Log.e("TAG","id tự tạo: "+ id);
+        }
+        product.setName(nameProduct.getText().toString().trim());
+        product.setDesciption(DesProduct.getText().toString().trim());
+        product.setPrice(Double.parseDouble(priceNoSaleProduct.getText().toString().trim()));
+        product.setPromotionaprice(Double.parseDouble(PriceSaleProduct.getText().toString().trim()));
+        product.setQuantity(Integer.parseInt(QuantityProduct.getText().toString().trim()));
+        Log.e("TAG", (String) mySpinner.getSelectedItem());
+        for (Category cate:categories ) {
+            if(cate.getName().equals((String)mySpinner.getSelectedItem())){
+                entity =cate;
+                product.setCategory(entity);
+                break;
             }
         }
         return product;

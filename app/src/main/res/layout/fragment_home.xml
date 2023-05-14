@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/HomeFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#00BCD4"
@@ -105,7 +106,7 @@
                         android:textColor="#807f84"
                         android:drawableRight="@drawable/next_btn"
                         android:gravity="center|top"
-                        android:text="Revenue"
+                        android:text="Doanh số"
                         android:textSize="14dp" />
                 </LinearLayout>
                 <LinearLayout
@@ -120,8 +121,8 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/number_visitors"
-                        android:text="_"
+                        android:id="@+id/user_number"
+                        android:text="0.0"
                         android:textFontWeight="400"
                         android:layout_weight="1"
                         android:textSize="16dp"
@@ -137,39 +138,6 @@
                         android:drawableRight="@drawable/next_btn"
                         android:gravity="center|top"
                         android:text="Người dùng"
-                        android:textSize="14dp" />
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/sale_figures_item3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:weightSum="2"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/number_Rate"
-                        android:text="_"
-                        android:textFontWeight="400"
-                        android:layout_weight="1"
-                        android:textSize="16dp"
-                        android:gravity="bottom|center"
-                        android:textColor="#000"/>
-
-                    <TextView
-                        android:id="@+id/storeRate"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:textColor="#807f84"
-                        android:drawableRight="@drawable/next_btn"
-                        android:gravity="center|top"
-                        android:text="Store Rate"
                         android:textSize="14dp" />
                 </LinearLayout>
             </LinearLayout>
@@ -544,13 +512,13 @@
                     app:layout_constraintTop_toBottomOf="@+id/productAway">
 
                     <TextView
-                        android:id="@+id/add_product_btn"
+                        android:id="@+id/manager_product"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
 
                         android:drawableStart="@drawable/add_icon"
                         android:gravity="center"
-                        android:text="Thêm sản phẩm"
+                        android:text="Quản lý sản phẩm"
                         android:textColor="@color/purple_700"
                         android:textSize="14dp" />
                 </LinearLayout>
@@ -637,7 +605,7 @@
                         android:drawableRight="@drawable/next_action"
                         android:gravity="center|start"
                         android:paddingStart="8dp"
-                        android:text="Policy Center"
+                        android:text="Doanh số cửa hàng"
                         android:textColor="#000000"
                         android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -663,7 +631,7 @@
                         android:drawableRight="@drawable/next_action"
                         android:gravity="center|start"
                         android:paddingStart="8dp"
-                        android:text="Help Center"
+                        android:text="Người dùng tiềm năng"
                         android:textColor="#000000"
                         android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -688,11 +656,11 @@
                         android:layout_weight="1"
                         android:background="@drawable/white_background"
                         android:gravity="center"
-                        android:text="Logout"
+                        android:text="Đăng xuất"
                         android:textColor="#000"
                         android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

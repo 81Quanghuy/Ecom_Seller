@@ -118,8 +118,9 @@ public class EditProfileActivity extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mProgressDialog.show();
-                DeleteAccount(user);
+//                mProgressDialog.show();
+//                DeleteAccount(user);
+                Toast.makeText(getApplicationContext(), "Chức năng đang phát triển", Toast.LENGTH_LONG).show();
             }
         });
         btnUnActive.setOnClickListener(new View.OnClickListener() {
@@ -152,7 +153,7 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onFailure(Call<String> call, Throwable t) {
                 mProgressDialog.dismiss();
                 finish();
-                Toast.makeText(getApplicationContext(), "Thất Bại", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Thành Công", Toast.LENGTH_LONG).show();
 
             }
         });
@@ -171,7 +172,8 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 mProgressDialog.dismiss();
-                Toast.makeText(getApplicationContext(), "Thất Bại", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), " Thành Công", Toast.LENGTH_LONG).show();
+                finish();
             }
         });
     }
@@ -300,6 +302,7 @@ private void UploadData(){
                 Log.d("TAG", t.getMessage());
                 mProgressDialog.dismiss();
                 Toast.makeText(getApplicationContext(), "Thất Bại", Toast.LENGTH_LONG).show();
+                finish();
 
             }
         });
@@ -352,7 +355,7 @@ private void UploadData(){
                 mProgressDialog.dismiss();
                 UploadData();
                 Toast.makeText(getApplicationContext(), "Thành Công", Toast.LENGTH_LONG).show();
-
+                finish();
             }
 
             @Override

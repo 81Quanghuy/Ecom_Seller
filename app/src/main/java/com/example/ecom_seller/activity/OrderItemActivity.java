@@ -1,10 +1,13 @@
 package com.example.ecom_seller.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,7 +39,7 @@ public class OrderItemActivity extends AppCompatActivity {
     List<OrderItem> listOrderItem;
     LinearLayout layoutBtn;
     Button btnTuChoiOrder,btnChapNhanOrder;
-
+    ProgressDialog mProgressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,41 +60,133 @@ public class OrderItemActivity extends AppCompatActivity {
     }
 
     private void ChapNhanOrder() {
-        APIService.apiService.changeStatuss(id,StatusOrder.DANGGIAO).enqueue(new Callback<Order>() {
-            @Override
-            public void onResponse(Call<Order> call, Response<Order> response) {
-                if(response.isSuccessful()){
-                    Toast.makeText(OrderItemActivity.this, "Đã chấp nhận các đơn hàng trên", Toast.LENGTH_LONG).show();
-//                    Intent intent = new Intent(OrderDetailActivity.this, MainActivity.class);
-//                    startActivity(intent);
-                    finish();
+
+        if (btnChapNhanOrder.getText().toString() =="Khách hàng đã nhận hàng"){
+            mProgressDialog.show();
+            APIService.apiService.changeStatuss(id,StatusOrder.DAGIAO).enqueue(new Callback<Order>() {
+                @Override
+                public void onResponse(Call<Order> call, Response<Order> response) {
+                    if(response.isSuccessful()){
+                        Toast.makeText(OrderItemActivity.this, "Thành công", Toast.LENGTH_LONG).show();
+                        mProgressDialog.dismiss();
+                        finish();
+                    }
                 }
+
+                @Override
+                public void onFailure(Call<Order> call, Throwable t) {
+                    mProgressDialog.dismiss();
+                    Toast.makeText(OrderItemActivity.this, "Có lỗi ", Toast.LENGTH_LONG).show();
+                }
+            });
+        } else if (btnChapNhanOrder.getText().toString() =="Xóa đơn hàng") {
+            showDeleteConfirmationDialog();
+
+        } else{
+            mProgressDialog.show();
+            APIService.apiService.changeStatuss(id,StatusOrder.DANGGIAO).enqueue(new Callback<Order>() {
+                @Override
+                public void onResponse(Call<Order> call, Response<Order> response) {
+                    if(response.isSuccessful()){
+                        Toast.makeText(OrderItemActivity.this, "Đã chấp nhận các đơn hàng trên", Toast.LENGTH_LONG).show();
+                        mProgressDialog.dismiss();
+                        finish();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Order> call, Throwable t) {
+                    mProgressDialog.dismiss();
+                    Toast.makeText(OrderItemActivity.this, "Có lỗi ", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+
+    }
+    private void showDeleteConfirmationDialog() {
+        // Tạo AlertDialog.Builder và thiết lập các thuộc tính
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogTheme);
+        builder.setTitle(R.string.alter_title);
+        builder.setMessage(R.string.alter_message_product);
+        builder.setIcon(R.drawable.baseline_delete_24);
+        builder.setPositiveButton(R.string.alter_yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User đã nhấn "Delete"
+                DeleteOrder();
+            }
+        });
+        builder.setNegativeButton(R.string.alter_no, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User đã nhấn "Cancel"
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        // Tạo và hiển thị AlertDialog
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+    private void DeleteOrder() {
+        mProgressDialog.show();
+        Call<Void> call = APIService.apiService.deleteOrder(id);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Toast.makeText(OrderItemActivity.this, "Đã xóa đơn hàng", Toast.LENGTH_LONG).show();
+                mProgressDialog.dismiss();
+                finish();
             }
 
             @Override
-            public void onFailure(Call<Order> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
+                mProgressDialog.dismiss();
                 Toast.makeText(OrderItemActivity.this, "Có lỗi ", Toast.LENGTH_LONG).show();
             }
         });
     }
 
     private void TuChoiOrder() {
-        APIService.apiService.changeStatuss(id,StatusOrder.TUCHOI).enqueue(new Callback<Order>() {
-            @Override
-            public void onResponse(Call<Order> call, Response<Order> response) {
-                if(response.isSuccessful()){
-                    Toast.makeText(OrderItemActivity.this, "Đã từ chối các đơn hàng trên", Toast.LENGTH_LONG).show();
-//                    Intent intent = new Intent(OrderDetailActivity.this, MainActivity.class);
-//                    startActivity(intent);
-                    finish();
+        mProgressDialog.show();
+        if (btnTuChoiOrder.getText().toString() =="Khách hàng hủy đơn"){
+            APIService.apiService.changeStatuss(id,StatusOrder.HUY).enqueue(new Callback<Order>() {
+                @Override
+                public void onResponse(Call<Order> call, Response<Order> response) {
+                    if(response.isSuccessful()){
+                        mProgressDialog.dismiss();
+                        Toast.makeText(OrderItemActivity.this, "Thành công", Toast.LENGTH_LONG).show();
+                        finish();
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<Order> call, Throwable t) {
-                Toast.makeText(OrderItemActivity.this, "Có lỗi ", Toast.LENGTH_LONG).show();
-            }
-        });
+                @Override
+                public void onFailure(Call<Order> call, Throwable t) {
+                    mProgressDialog.dismiss();
+                    Toast.makeText(OrderItemActivity.this, "Có lỗi ", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+        else{
+            APIService.apiService.changeStatuss(id,StatusOrder.TUCHOI).enqueue(new Callback<Order>() {
+                @Override
+                public void onResponse(Call<Order> call, Response<Order> response) {
+                    if(response.isSuccessful()){
+                        mProgressDialog.dismiss();
+                        Toast.makeText(OrderItemActivity.this, "Đã từ chối các đơn hàng trên", Toast.LENGTH_LONG).show();
+
+                        finish();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Order> call, Throwable t) {
+                    mProgressDialog.dismiss();
+                    Toast.makeText(OrderItemActivity.this, "Có lỗi ", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+
     }
 
     private void AnhXa() {
@@ -99,6 +194,8 @@ public class OrderItemActivity extends AppCompatActivity {
         layoutBtn = findViewById(R.id.LayoutBtn);
         btnTuChoiOrder = findViewById(R.id.btnTuChoiOrderitem);
         btnChapNhanOrder = findViewById(R.id.btnChapNhanOrderitem);
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setMessage("Vui lòng đợi ...");
         //lấy dữ liệu từ activity khác
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -111,9 +208,17 @@ public class OrderItemActivity extends AppCompatActivity {
             Log.d("TAG", "ID: "+id);
             if(StatusOrder.valueOf(Status)== StatusOrder.CHOXACNHAN){
                 layoutBtn.setVisibility(View.VISIBLE);
-            }
-            else {
-                layoutBtn.setVisibility(View.INVISIBLE);
+                btnTuChoiOrder.setText("Từ chối đơn hàng");
+                btnChapNhanOrder.setText("Chấp nhận đơn hàng");
+            } else if (StatusOrder.valueOf(Status)== StatusOrder.DANGGIAO) {
+                layoutBtn.setVisibility(View.VISIBLE);
+                btnTuChoiOrder.setText("Khách hàng hủy đơn");
+                btnChapNhanOrder.setText("Khách hàng đã nhận hàng");
+            } else {
+                layoutBtn.setVisibility(View.VISIBLE);
+                btnTuChoiOrder.setVisibility(View.GONE);
+                btnChapNhanOrder.setText("Xóa đơn hàng");
+
             }
 
                 getOrderItem(id);

@@ -1,11 +1,14 @@
 package com.example.ecom_seller.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -38,10 +41,11 @@ public class ProductDetailActivity extends AppCompatActivity {
     String id;
     CircleIndicator3 mCircleIndicator3;
     Product product;
-    AppCompatButton Ngungkinhdoanh, ThayDoiThongTin;
+    AppCompatButton Ngungkinhdoanh, ThayDoiThongTin,btnDeleteProduct;
     TextView tvPrice, tvDesciption, tvGiaChuaGiam, tvNameSp, tvHangSP;
     RecyclerView rcReview;
     List<Review> mListReview;
+    ProgressDialog mProgressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,13 +61,94 @@ public class ProductDetailActivity extends AppCompatActivity {
         Ngungkinhdoanh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Ngungkinhdoanh();
+                if(Ngungkinhdoanh.getText().toString().trim().equals("Ngừng kinh doanh")){
+                    Ngungkinhdoanh();
+                }
+                else{
+                    showDeleteConfirmationDialog();
+                }
             }
         });
         ThayDoiThongTin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ThayDoiThongTin();
+                if(ThayDoiThongTin.getText().toString().trim().equals("Thay đổi thông tin")){
+                    ThayDoiThongTin();
+                }
+                else{
+                    TiepTucKinhDoanh();
+                }
+            }
+        });
+    }
+
+    private void showDeleteConfirmationDialog() {
+        // Tạo AlertDialog.Builder và thiết lập các thuộc tính
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogTheme);
+        builder.setTitle(R.string.alter_title);
+        builder.setMessage(R.string.alter_message_product);
+        builder.setIcon(R.drawable.baseline_delete_24);
+        builder.setPositiveButton(R.string.alter_yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User đã nhấn "Delete"
+                DeleteProduct();
+            }
+        });
+        builder.setNegativeButton(R.string.alter_no, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User đã nhấn "Cancel"
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        // Tạo và hiển thị AlertDialog
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+
+
+    private void DeleteProduct() {
+        mProgressDialog.show();
+        Call<Void> call = APIService.apiService.deleteProduct(id);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                mProgressDialog.dismiss();
+                if(response.isSuccessful()){
+                    Toast.makeText(ProductDetailActivity.this, "Xóa sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                mProgressDialog.dismiss();
+                Toast.makeText(ProductDetailActivity.this, "Xóa sản phẩm thất bại", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void TiepTucKinhDoanh() {
+        mProgressDialog.show();
+        APIService.apiService.ToggeActive(id,true).enqueue(new Callback<Product>() {
+            @Override
+            public void onResponse(Call<Product> call, Response<Product> response) {
+                if(response.isSuccessful()){
+                    mProgressDialog.dismiss();
+                    Toast.makeText(ProductDetailActivity.this, "Thành công", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Product> call, Throwable t) {
+
+                Log.e("TAG", t.getMessage());
+                mProgressDialog.dismiss();
+                Toast.makeText(ProductDetailActivity.this, "Lỗi khi thực hiện", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -78,11 +163,12 @@ public class ProductDetailActivity extends AppCompatActivity {
     }
 
     private void Ngungkinhdoanh() {
-
+        mProgressDialog.show();
         APIService.apiService.ToggeActive(id,false).enqueue(new Callback<Product>() {
             @Override
             public void onResponse(Call<Product> call, Response<Product> response) {
                 if(response.isSuccessful()){
+                    mProgressDialog.dismiss();
                     Toast.makeText(ProductDetailActivity.this, "Đã ngừng kinh doanh sản phẩm", Toast.LENGTH_SHORT).show();
                     finish();
                 }
@@ -92,6 +178,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             public void onFailure(Call<Product> call, Throwable t) {
 
                 Log.e("TAG", t.getMessage());
+                mProgressDialog.dismiss();
                 Toast.makeText(ProductDetailActivity.this, "Sản phẩm đang được bán", Toast.LENGTH_SHORT).show();
             }
         });
@@ -111,6 +198,8 @@ public class ProductDetailActivity extends AppCompatActivity {
         Ngungkinhdoanh = findViewById(R.id.btnunactivePro);
         ThayDoiThongTin = findViewById(R.id.btnchangePro);
         Intent intent = getIntent();
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setMessage("Vui lòng đợi ...");
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
             id = bundle.getString("ProductId");
@@ -167,6 +256,14 @@ public class ProductDetailActivity extends AppCompatActivity {
                 mViewPager2.setAdapter(photoAdapter);
                 mCircleIndicator3.setViewPager(mViewPager2);
                 GetReviews(product);
+                if(product.getIsselling()){
+                    Ngungkinhdoanh.setText("Ngừng kinh doanh");
+                    ThayDoiThongTin.setText("Thay đổi thông tin");
+                }
+                else {
+                    Ngungkinhdoanh.setText("Xóa sản phẩm");
+                    ThayDoiThongTin.setText("Tiếp tục kinh doanh");
+                }
             }
             @Override
             public void onFailure(Call<Product> call, Throwable t) {

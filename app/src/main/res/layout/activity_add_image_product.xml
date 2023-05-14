@@ -54,24 +54,16 @@
             />
 
 
-        <ImageView
-            android:id="@+id/changeprofilepic"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignRight="@+id/profilepic"
-            android:layout_alignBottom="@+id/profilepic"
-            android:elevation="4dp"
-            android:src="@drawable/uploadpicdark" />
-
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:id="@+id/layoutAddProduct"
         android:layout_margin="12dp"
         android:layout_below="@+id/imgprofile"
-        android:weightSum="3"
+        android:weightSum="2"
         android:layout_alignParentEnd="true"
         android:orientation="horizontal"
         >
@@ -90,18 +82,19 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginRight="8dp"
-            android:background="@drawable/btn_background"
-            android:text="Tiếp tục"
-            android:textColor="#ffffff" />
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_product_add_finish"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
             android:background="@drawable/bg_boder"
-            android:text="Kết thúc"
+            android:text="Lưu ảnh"
             android:textColor="#000000" />
-    </LinearLayout>
 
+    </LinearLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_product_add_finish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+
+        android:text="Tạo sản phẩm"
+        android:background="@drawable/btn_background"
+        android:layout_below="@+id/layoutAddProduct"
+        android:textColor="#ffffff" />
 </RelativeLayout>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.OrderAnalysis">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:id="@+id/tvAlOrder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="THỐNG KÊ ĐƠN HÀNG"
+            android:background="@color/primary_color"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_back_to_home"
+            app:layout_constraintStart_toEndOf="@+id/btn_back_to_home"
+            app:layout_constraintVertical_bias="0.454" />
+    </LinearLayout>
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_orderAnlysis"
+        android:background="@color/black"
+        app:tabSelectedTextColor="@color/primary_color"
+        app:tabIndicatorColor="@color/white"
+        app:tabTextColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager2_alOrder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

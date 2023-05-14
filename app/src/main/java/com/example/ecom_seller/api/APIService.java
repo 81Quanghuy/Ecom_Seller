@@ -7,6 +7,7 @@ import com.example.ecom_seller.model.ImageData;
 import com.example.ecom_seller.model.Order;
 import com.example.ecom_seller.model.OrderItem;
 import com.example.ecom_seller.model.Product;
+import com.example.ecom_seller.model.ReponseThongKeProduct;
 import com.example.ecom_seller.model.Review;
 import com.example.ecom_seller.model.StatusOrder;
 import com.example.ecom_seller.model.User;
@@ -20,6 +21,7 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -27,6 +29,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface APIService {
@@ -44,6 +47,9 @@ public interface APIService {
     Call<User> loginWithLocal( @Field("username") String username, @Field("password") String password);
     @GET("products/list")
     Call<List<Product>> getProducts();
+
+    @GET("products/listAll")
+    Call<List<Product>> getAllProducts();
     @POST("products/notify")
     Call<Product> productNotify(@Body Product product);
     @POST("products/getId")
@@ -82,10 +88,8 @@ public interface APIService {
     @POST("user")
     @FormUrlEncoded
     Call<User> signUp( @Field("username") String username, @Field("password") String password);
-    @POST("products/delete")
-    @FormUrlEncoded
-    Call<String> deleteProduct(@Field("id") String id);
-
+    @DELETE("products/delete")
+    Call<Void> deleteProduct(@Query("id") String id);
     @POST("images")
     @Multipart
     Call<ImageData> uploadImages(@Part MultipartBody.Part image);
@@ -93,13 +97,15 @@ public interface APIService {
     @POST("user/updateUser")
     Call<User> updateUser(@Body User user);
 
-    @POST("order/updateStatusAll")
-    @FormUrlEncoded
-    Call<List<Order>> updateStatusAll(@Field("status") StatusOrder Status,@Field("statusChange") StatusOrder statusChange);
     @POST("order/getList")
     @FormUrlEncoded
     Call<List<Order>> getOrderList(@Field("status") StatusOrder Status);
 
+    @POST("order/analysis")
+    @FormUrlEncoded
+    Call<List<Order>> getOrderAnalysis(@Field("focus") String Status,@Field("date") String date);
+    @GET("order/list")
+    Call<List<Order>> getOrderAll();
     @GET("user/list")
     Call<List<User>> getUserAll();
 
@@ -118,8 +124,14 @@ public interface APIService {
     @FormUrlEncoded
     Call<Order> changeStatuss(@Field("id")String id,@Field("status") StatusOrder status);
 
-    @POST("order/delete")
-    Call<String> deleteOrder(@Body Order order);
+    @DELETE("order/deleteByStatus")
+    Call<Void> deleteOrderByStatus(@Query("status") StatusOrder status);
+
+    @POST("products/listByStatus")
+    @FormUrlEncoded
+    Call<List<Product>> getProductByStatus(@Field("status") String status);
+    @DELETE("order/delete")
+    Call<Void> deleteOrder(@Query("id") String id);
 
     @POST("products/getId")
     @FormUrlEncoded
@@ -128,4 +140,19 @@ public interface APIService {
     @POST("products/active")
     @FormUrlEncoded
     Call<Product> ToggeActive(@Field("id") String id,@Field("isselling") Boolean isselling);
+
+    //THống kê
+
+    @GET("products/productByCount")
+    Call<List<Product>> getProductByCount();
+
+
+    //Thống kế sản phẩm
+    @POST("orderItem/getListByTime")
+    @FormUrlEncoded
+    Call<List<ReponseThongKeProduct>> getProductByDate(@Field("date") String time);
+
+
+
+
 }

@@ -6,45 +6,30 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/top_bar"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/btn_back_to_home"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/white_setting" />
-
-        <TextView
-            android:id="@+id/tvCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Đơn Mua"
-            android:textColor="#ffffff"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_back_to_home"
-            app:layout_constraintStart_toEndOf="@+id/btn_back_to_home"
-            app:layout_constraintTop_toTopOf="@+id/btn_back_to_home"
-            app:layout_constraintVertical_bias="0.454" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <TextView
+                android:id="@+id/tvCategory"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="ĐƠN HÀNG"
+                android:background="@color/primary_color"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_back_to_home"
+                app:layout_constraintStart_toEndOf="@+id/btn_back_to_home"
+                app:layout_constraintVertical_bias="0.454" />
+        </LinearLayout>
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout_order"
-        android:background="@color/grey_light"
-        app:tabTextColor="@color/black"
-        app:tabSelectedTextColor="@color/black"
-        app:tabIndicatorColor="@color/black"
+        android:background="@color/black"
+        app:tabMode="scrollable"
+        app:tabTextColor="@color/white"
+        app:tabSelectedTextColor="@color/primary_color"
+        app:tabIndicatorColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <androidx.viewpager2.widget.ViewPager2

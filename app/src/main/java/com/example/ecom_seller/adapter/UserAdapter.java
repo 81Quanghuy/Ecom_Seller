@@ -51,6 +51,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
             holder.id = user.getId();
             holder.tvUserName.setText(user.getUsername());
             holder.tvPhone.setText(user.getPhone());
+            holder.tvEmail.setText(user.getEmail());
+            holder.tvName.setText(user.getFullName());
             holder.tvStatus.setText(user.getActive() == true ? "Đang Hoạt Động": "Không Hoạt Động");
             Glide.with(context).load(user.getAvatar()).into(holder.img);
         }
@@ -63,14 +65,16 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView img;
-        TextView tvUserName, tvPhone, tvStatus;
+        TextView tvUserName, tvPhone, tvStatus, tvEmail, tvName;
         private String id;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             img = itemView.findViewById(R.id.image_user);
-            tvUserName = itemView.findViewById(R.id.tv_name_user);
+            tvUserName = itemView.findViewById(R.id.tv_username_user);
             tvPhone = itemView.findViewById(R.id.tv_phone_user);
             tvStatus = itemView.findViewById(R.id.tv_status);
+            tvEmail = itemView.findViewById(R.id.tv_email_user);
+            tvName = itemView.findViewById(R.id.tv_name_user);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

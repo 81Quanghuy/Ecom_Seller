@@ -135,26 +135,9 @@ public class CategoryActivity extends AppCompatActivity {
 
         RequestBody requestBodyAvt = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         partAvatar = MultipartBody.Part.createFormData("image", file.getName(), requestBodyAvt);
+        imageUserText.setText(APIService.BASE_URL + "images/" + file.getName());
+        MotifyCategory(partAvatar);
 
-        if (CheckCate()) {
-            APIService.apiService.uploadImages(partAvatar).enqueue(new Callback<ImageData>() {
-                @Override
-                public void onResponse(Call<ImageData> call, Response<ImageData> response) {
-
-                    imageData = response.body();
-                    imageUserText.setText(APIService.BASE_URL + "images/" + imageData.getName());
-                    MotifyCategory();
-                }
-
-                @Override
-                public void onFailure(Call<ImageData> call, Throwable t) {
-                    Log.d("TAG", t.getMessage());
-                    mProgressDialog.dismiss();
-                    Toast.makeText(getApplicationContext(), "Thất Bại", Toast.LENGTH_LONG).show();
-
-                }
-            });
-        }
     }
 
 
@@ -370,6 +353,50 @@ public class CategoryActivity extends AppCompatActivity {
         }
         return cate;
     }
+    private void MotifyCategory(MultipartBody.Part image) {
+        if(CheckCate()){
+            cate = UploadCate();
+            if (cate != null) {
+                mProgressDialog.show();
+                Log.e("TAG",cate.getId()+"\n"+cate.getName()+"\n"+cate.getImage()+"\n"+cate.getIsdeleted());
+                APIService.apiService.UpdateCate(cate).enqueue(new Callback<Category>() {
+                    @Override
+                    public void onResponse(Call<Category> call, Response<Category> response) {
+                        if(response.isSuccessful()){
+                                APIService.apiService.uploadImages(image).enqueue(new Callback<ImageData>() {
+                                    @Override
+                                    public void onResponse(Call<ImageData> call, Response<ImageData> response) {
+                                        Toast.makeText(CategoryActivity.this, "Thay đổi thành công", Toast.LENGTH_SHORT).show();
+                                            mProgressDialog.dismiss();
+                                            finish();
+
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<ImageData> call, Throwable t) {
+                                        Log.d("TAG", t.getMessage());
+                                        mProgressDialog.dismiss();
+                                        Toast.makeText(getApplicationContext(), "Thay đổi thành công", Toast.LENGTH_LONG).show();
+                                        finish();
+                                    }
+                                });
+                            }
+//
+                        }
+
+                    @Override
+                    public void onFailure(Call<Category> call, Throwable t) {
+                        Toast.makeText(CategoryActivity.this, "Thay đổi thất bại", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+
+                });
+            }
+            else{
+                Log.e("TAG","Ko Vào được If");
+            }
+        }
+    }
     private void MotifyCategory() {
         if(CheckCate()){
             cate = UploadCate();
@@ -384,12 +411,7 @@ public class CategoryActivity extends AppCompatActivity {
                             mProgressDialog.dismiss();
                             finish();
                         }
-                        else{
-                            response.message();
-                            mProgressDialog.dismiss();
-                            Toast.makeText(CategoryActivity.this, response.message(), Toast.LENGTH_SHORT).show();
-
-                        }
+//
                     }
 
                     @Override
@@ -397,6 +419,7 @@ public class CategoryActivity extends AppCompatActivity {
                         Toast.makeText(CategoryActivity.this, "Thay đổi thất bại", Toast.LENGTH_SHORT).show();
                         finish();
                     }
+
                 });
             }
             else{

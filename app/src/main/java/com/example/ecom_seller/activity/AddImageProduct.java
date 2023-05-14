@@ -87,13 +87,17 @@ public class AddImageProduct extends AppCompatActivity {
         btnPres.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                ProductDatabase.getInstance(getApplicationContext()).productDao().deleteAll();
                 finish();
             }
         });
         btnTT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //XacNhan();
+                if(mUri!= null || mPartList.size()>0){
+                    btnKT.setVisibility(View.VISIBLE);
+                }
                 UpdateData();
             }
         });
@@ -131,6 +135,8 @@ public class AddImageProduct extends AppCompatActivity {
         alert.show();
     }
     private void UpdateData() {
+        Log.e("TAG", "product database: "+ProductDatabase.getInstance(getApplicationContext()).productDao().getAll().size() );
+
         if (mUri != null){
             String strRealPath = RealPathUtil.getRealPath(this, mUri); //lấy đường dẫn thực
 
@@ -141,8 +147,18 @@ public class AddImageProduct extends AppCompatActivity {
             MultipartBody.Part partAvatar = MultipartBody.Part.createFormData("image", file.getName(), requestBodyAvt);
 
             mPartList.add(partAvatar);
+            Log.e("TAG", "UpdateData: "+ mPartList.get(0).toString() );
             product = ProductDatabase.getInstance(getApplicationContext()).productDao().getAll().get(0);
-            product.setListimage(product.getListimage() + "," +APIService.BASE_URL + "images/" + file.getName());
+            // Nếu chưa có ảnh thì lưu ảnh đầu tiên
+            Log.e("TAG", "Product chưa lưu ảnh: "+ product.getListimage());
+            if (product.getListimage() == null){
+                product.setListimage(APIService.BASE_URL + "images/" + file.getName());
+            }
+            // Nếu đã có ảnh thì lưu ảnh tiếp theo
+            else{
+                product.setListimage(product.getListimage() + "," +APIService.BASE_URL + "images/" + file.getName());
+                Log.e("TAG", "Product đã lưu ảnh: "+ product.getListimage());
+            }
             ProductDatabase.getInstance(getApplicationContext()).productDao().updateProduct(product);
             Toast.makeText(this, "Đã lưu hình ảnh", Toast.LENGTH_SHORT).show();
         }
@@ -152,68 +168,18 @@ public class AddImageProduct extends AppCompatActivity {
 
     }
 
-    public MultipartBody.Part AddMutipart(){
-        String strRealPath = RealPathUtil.getRealPath(this, mUri); //lấy đường dẫn thực
-
-        Log.e("TAG", strRealPath);
-        File file = new File(strRealPath);
-
-        RequestBody requestBodyAvt = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-        MultipartBody.Part partAvatar = MultipartBody.Part.createFormData("image", file.getName(), requestBodyAvt);
-        return  partAvatar;
-
-    }
     private void AddProductComplete() {
         // Đã truyền 1 list ảnh
-        if(mPartList!= null){
-            for (MultipartBody.Part part : mPartList) {
-                APIService.apiService.uploadImages(part).enqueue(new Callback<ImageData>() {
-                    @Override
-                    public void onResponse(Call<ImageData> call, Response<ImageData> response) {
-                        Toast.makeText(AddImageProduct.this, "Upload Image Success", Toast.LENGTH_SHORT).show();
+        Log.e("TAG", "product database: "+ProductDatabase.getInstance(getApplicationContext()).productDao().getAll().size() );
 
-                    }
-
-                    @Override
-                    public void onFailure(Call<ImageData> call, Throwable t) {
-                        Toast.makeText(AddImageProduct.this, "Upload Image Fail", Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-            }
-        }
-        else{
-            if(mUri!= null){
-                APIService.apiService.uploadImages(AddMutipart()).enqueue(new Callback<ImageData>() {
-                    @Override
-                    public void onResponse(Call<ImageData> call, Response<ImageData> response) {
-                        Toast.makeText(AddImageProduct.this, "Upload Image Success", Toast.LENGTH_SHORT).show();
-                        if(product.getListimage()!= null){
-                            product.setListimage(product.getListimage() + "," +APIService.BASE_URL + "images/" + response.body().getName());
-
-                        }
-                        else{
-                            product.setListimage(APIService.BASE_URL + "images/" + response.body().getName());
-                        }
-                        ProductDatabase.getInstance(getApplicationContext()).productDao().updateProduct(product);
-                        }
-
-                    @Override
-                    public void onFailure(Call<ImageData> call, Throwable t) {
-                        Toast.makeText(AddImageProduct.this, "Upload Image Fail", Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-            }
-            else{
-                    Toast.makeText(this, "Chưa thêm hình ảnh", Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        // Đã truyền 1 list ảnh or 1 ảnh
-        if(mPartList!= null || mUri!= null){
+        if(mPartList.size()>0){
+            Log.e("TAG", "AddProductComplete: "+ mPartList.size() );
+            Log.e("TAG", "AddProductComplete: "+ mPartList.get(mPartList.size()-1) );
             mProgressDialog.show();
+
             product = ProductDatabase.getInstance(getApplicationContext()).productDao().getAll().get(0);
+            Log.e("TAG", "product list image trước khi xử lsy: "+ product.getListimage());
+            //Xử lý chuỗi ảnh: lấy 3 ảnh cuối cùng
             String newString= "";
             String[] parts = product.getListimage().split(",");
             if (parts.length > 2) {
@@ -223,17 +189,57 @@ public class AddImageProduct extends AppCompatActivity {
                 newParts[2] = parts[parts.length-1];
                 newString = String.join(",", newParts);
             }
+            else{
+                newString = product.getListimage();
+            }
             product.setListimage(newString);
+            Log.e("TAG", "product list image sau khi xử lsy: "+ product.getListimage());
+            //Upload Product
             APIService.apiService.productNotify(product).enqueue(new Callback<Product>() {
                 @Override
                 public void onResponse(Call<Product> call, Response<Product> response) {
                     if(response.isSuccessful()){
+                        ProductDatabase.getInstance(getApplicationContext()).productDao().deleteAll();
                         mProgressDialog.dismiss();
-                        Toast.makeText(AddImageProduct.this, "Oke ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddImageProduct.this, "Tạo sản phẩm thành công ", Toast.LENGTH_SHORT).show();
                         finish();
-//                    Intent intent = new Intent(AddImageProduct.this, ProductFragment.class);
-//
-//                    startActivity(intent);
+                    }
+                    else{
+                        mProgressDialog.dismiss();
+                        Toast.makeText(AddImageProduct.this,"", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                @Override
+                public void onFailure(Call<Product> call, Throwable t) {
+                    mProgressDialog.dismiss();
+                    Toast.makeText(AddImageProduct.this, "Thất bại", Toast.LENGTH_SHORT).show();
+                }
+            });
+            //upload ảnh
+            for (MultipartBody.Part part : mPartList) {
+                APIService.apiService.uploadImages(part).enqueue(new Callback<ImageData>() {
+                    @Override
+                    public void onResponse(Call<ImageData> call, Response<ImageData> response) {
+                        Toast.makeText(AddImageProduct.this, "Upload Image Success", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public void onFailure(Call<ImageData> call, Throwable t) {
+                        Log.e("TAG", "onFailure: "+ t.getMessage() );
+                    }
+                });
+            }
+        }
+        else{
+            mProgressDialog.show();
+            //Upload Product
+            APIService.apiService.productNotify(product).enqueue(new Callback<Product>() {
+                @Override
+                public void onResponse(Call<Product> call, Response<Product> response) {
+                    if(response.isSuccessful()){
+                        ProductDatabase.getInstance(getApplicationContext()).productDao().deleteAll();
+                        mProgressDialog.dismiss();
+                        Toast.makeText(AddImageProduct.this, "Thay đổi thành công ", Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                     else{
                         mProgressDialog.dismiss();
@@ -254,6 +260,15 @@ public class AddImageProduct extends AppCompatActivity {
         btnPres = findViewById(R.id.btn_pre_product);
         btnTT = findViewById(R.id.btn_image_product_cnt);
         btnKT = findViewById(R.id.btn_product_add_finish);
+        product = ProductDatabase.getInstance(getApplicationContext()).productDao().getAll().get(0);
+        if(product.getListimage()!=null){
+            btnKT.setText("Hoàn thành");
+            btnKT.setVisibility(View.VISIBLE);
+        }
+        else{
+            btnKT.setVisibility(View.INVISIBLE);
+        }
+
         imagePhoto = findViewById(R.id.imagePhoto);
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage("Vui lòng đợi ...");

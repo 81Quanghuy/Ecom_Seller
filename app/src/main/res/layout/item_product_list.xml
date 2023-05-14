@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/btnSanPham"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:background="#ffffff">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="4dp"
+        android:background="@drawable/bg_background1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:padding="4dp"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/imgProductList"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_item_background"
+                android:scaleType="fitXY"
+                tools:srcCompat="@drawable/baseline_delete_24" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tvProductName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="Nước Tẩy Trang L'Oreal"
+                    android:textColor="#000"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp">
+                    <TextView
+                        android:id="@+id/loaisanpham"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Loại: "
+                        android:textColor="#000"
+                        android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/nameCateByProduct"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="256.000d"
+                        android:textColor="#000"
+                        android:textSize="12sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:layout_margin="4dp"
+                    android:layout_gravity="center">
+                    <TextView
+                        android:id="@+id/tvPriceProductList"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="256.000đ"
+                        android:textColor="#000000"
+                        android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/tvPriceSaleProduct"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="256.000d"
+                        android:textColor="#F44336"
+                        android:textSize="12sp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:gravity="right">
+                    <TextView
+                        android:id="@+id/quantityProduct123"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Số lượng: "
+                        android:textColor="#000"
+                        android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/tvQuantityProduct"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="256.000d"
+                        android:textColor="#000"
+                        android:textSize="12sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="2"
+                    android:layout_marginTop="4dp">
+                   <LinearLayout
+                       android:layout_width="wrap_content"
+                       android:layout_weight="1"
+                       android:layout_height="match_parent">
+                       <TextView
+                           android:id="@+id/tvRatingProduct"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:background="#F44336"
+                           android:drawableEnd="@drawable/baseline_star_24"
+                           android:text="4.7"
+                           android:textColor="#ffffff"
+                           android:textSize="10sp" />
+
+                       <TextView
+                           android:id="@+id/tvSoNguoiDanhGia1"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="(70)"
+                           android:textColor="#000000"
+                           android:textSize="10sp" />
+                   </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/tvCountProduct"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/cart"
+                            android:text="2048"
+                            android:textColor="#000000"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

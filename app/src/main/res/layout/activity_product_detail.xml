@@ -431,23 +431,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/back" />
 
-        <FrameLayout
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="right"
-            android:layout_marginEnd="35dp"
-            android:layout_marginRight="10dp"
-            android:onClick="onStartCart">
-
-
-
-
-
-        </FrameLayout>
-
-
-
     </RelativeLayout>
 
 
