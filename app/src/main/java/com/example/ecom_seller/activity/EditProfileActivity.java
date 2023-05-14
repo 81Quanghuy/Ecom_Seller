@@ -118,9 +118,9 @@ public class EditProfileActivity extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                mProgressDialog.show();
-//                DeleteAccount(user);
-                Toast.makeText(getApplicationContext(), "Chức năng đang phát triển", Toast.LENGTH_LONG).show();
+               mProgressDialog.show();
+               DeleteAccount(user); v
+               // Toast.makeText(getApplicationContext(), "Chức năng đang phát triển", Toast.LENGTH_LONG).show();
             }
         });
         btnUnActive.setOnClickListener(new View.OnClickListener() {

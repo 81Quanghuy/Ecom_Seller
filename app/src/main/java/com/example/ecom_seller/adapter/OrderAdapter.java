@@ -44,6 +44,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
             holder.Status =order.getStatusOrder().toString();
         holder.price.setText(order.getPrice().toString());
         holder.createAt.setText(order.getCreateat());
+        holder.updateAt.setText(order.getUpdateat());
         Glide.with(context).load(order.getUser().getAvatar()).into(holder.images);
 
         }
@@ -54,7 +55,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
         return array == null ? 0 : array.size();
     }
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView price,createAt;
+        public TextView price,createAt, updateAt;
         public ImageView images;
         private String id,Status;
         public MyViewHolder(@NonNull View itemView) {
@@ -62,7 +63,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
             price = (TextView) itemView.findViewById(R.id.tvPriceProduct);
             createAt = (TextView) itemView.findViewById(R.id.tvDateOrder);
             images =(ImageView) itemView.findViewById(R.id.imgOrderProduct);
-
+            updateAt = (TextView) itemView.findViewById(R.id.tvDateOrderNhan);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

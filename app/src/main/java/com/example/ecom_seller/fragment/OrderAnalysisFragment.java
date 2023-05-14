@@ -1,7 +1,11 @@
 package com.example.ecom_seller.fragment;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -10,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,18 +22,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ecom_seller.R;
 import com.example.ecom_seller.api.APIService;
 import com.example.ecom_seller.model.Order;
 import com.example.ecom_seller.model.StatusOrder;
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.pdf.PdfWriter;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -39,7 +53,7 @@ import retrofit2.Response;
 
 public class OrderAnalysisFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     String status;
-    Button btnFilterOrder;
+    Button btnFilterOrder,btnPrintOrder;
     SwipeRefreshLayout orderAnalysisFragment;
     ProgressDialog mProgressDialog;
     TextView timeAnalysis;
@@ -65,6 +79,13 @@ public class OrderAnalysisFragment extends Fragment implements SwipeRefreshLayou
                 }else{
                     loadData(status,timeAnalysis.getText().toString());
                 }
+            }
+        });
+
+        btnPrintOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                exportToPdf(getContext(),pieChart);
             }
         });
         timeAnalysis.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +115,73 @@ public class OrderAnalysisFragment extends Fragment implements SwipeRefreshLayou
         return view;
 
     }
+
+    public void exportToPdf(final Context context, final PieChart pieChart) {
+        // Show an AlertDialog to ask the user for the file name and location
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Save PDF");
+        builder.setMessage("Enter a file name and location");
+
+        final EditText input = new EditText(context);
+        builder.setView(input);
+
+        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String fileName = input.getText().toString().trim();
+
+                if (fileName.isEmpty()) {
+                    Toast.makeText(context, "Please enter a file name", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Create a new File object with the specified file name and location
+
+
+
+
+
+
+                File file = new File(Environment.getExternalStorageDirectory(), fileName + ".pdf");
+
+                try {
+                    Document document = new Document();
+                    PdfWriter.getInstance(document, new FileOutputStream(file));
+                    document.open();
+
+                    // Add pie chart to PDF
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    pieChart.getChartBitmap().compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    Image pieChartImage = Image.getInstance(stream.toByteArray());
+                    document.add(pieChartImage);
+
+//                    // Add bar chart to PDF
+//                    ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
+//                    barChart.getChartBitmap().compress(Bitmap.CompressFormat.PNG, 100, stream2);
+//                    Image barChartImage = Image.getInstance(stream2.toByteArray());
+//                    document.add(barChartImage);
+
+                    document.close();
+                    Toast.makeText(context, "Exported to PDF!", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.e("TAG", "onClick: "+e.getMessage() );
+                    Toast.makeText(context, "Export failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        } );
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+    }
+
+
 
 
     private void loadData(String status, String date) {
@@ -142,6 +230,7 @@ public class OrderAnalysisFragment extends Fragment implements SwipeRefreshLayou
         pieChart.getDescription().setEnabled(false);
         pieChart.setDrawHoleEnabled(false);
         btnFilterOrder = view.findViewById(R.id.btnFilterOrder);
+        btnPrintOrder = view.findViewById(R.id.btnPrintOrder);
     }
 
     private void loadData() {

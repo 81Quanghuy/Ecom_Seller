@@ -16,11 +16,11 @@
         />
    <LinearLayout
        android:layout_width="match_parent"
-       android:weightSum="2"
+       android:weightSum="3"
        android:orientation="vertical"
        android:layout_gravity="center"
        android:gravity="center"
-       android:layout_height="match_parent">
+       android:layout_height="90dp">
      <LinearLayout
          android:layout_width="match_parent"
          android:layout_weight="1"
@@ -51,6 +51,7 @@
            android:layout_width="match_parent"
            android:layout_height="match_parent"
            android:layout_weight="1"
+           android:gravity="center"
            android:orientation="horizontal">
            <TextView
                android:id="@+id/tvDateBuy"
@@ -71,7 +72,31 @@
                android:textColor="#000"
                tools:ignore="MissingConstraints" />
        </LinearLayout>
-
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:layout_weight="1"
+           android:gravity="center"
+           android:orientation="horizontal">
+           <TextView
+               android:id="@+id/tvDateNhan"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:singleLine="true"
+               android:text="Ngày nhận hàng: "
+               android:gravity="center|left"
+               android:textColor="#000"
+               tools:ignore="MissingConstraints" />
+           <TextView
+               android:id="@+id/tvDateOrderNhan"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:singleLine="true"
+               android:text="13"
+               android:gravity="center|left"
+               android:textColor="#000"
+               tools:ignore="MissingConstraints" />
+       </LinearLayout>
    </LinearLayout>
 
 </LinearLayout>

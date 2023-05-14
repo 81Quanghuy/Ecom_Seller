@@ -106,7 +106,7 @@
                         android:textColor="#807f84"
                         android:drawableRight="@drawable/next_btn"
                         android:gravity="center|top"
-                        android:text="Doanh số"
+                        android:text="Tổng Doanh Thu"
                         android:textSize="14dp" />
                 </LinearLayout>
                 <LinearLayout
@@ -143,6 +143,161 @@
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutDoanhThu"
+                android:layout_width="match_parent"
+                android:layout_height="100sp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+
+                android:background="@drawable/white_background">
+
+                <TextView
+                    android:id="@+id/DoanhThu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Doanh thu cửa hàng"
+                    android:textColor="#000"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextClock
+                    android:id="@+id/textClock"
+                    android:textColor="#807f84"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="200dp"
+                    android:layout_marginTop="9dp"
+                    android:drawableStart="@drawable/baseline_lock_clock_24"
+                    android:gravity="center"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:format24Hour="HH:mm:ss"
+                    android:format12Hour="hh:mm:ss a" />
+
+                <LinearLayout
+                    android:id="@+id/DoanhthuList"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="6dp"
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:weightSum="3"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/DoanhThu">
+
+                    <LinearLayout
+                        android:id="@+id/layoutdoanhthungay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:id="@+id/doanhthungay"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="bottom|center"
+                            android:text="0"
+                            android:textColor="@color/purple_700"
+                            android:textFontWeight="400"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:id="@+id/textdoanhthungay"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:drawableRight="@drawable/next_btn"
+                            android:gravity="center"
+                            android:text="Theo ngày"
+                            android:textColor="#807f84"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layoutdoanhthuthang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:weightSum="2"
+                        tools:ignore="DuplicateIds">
+
+                        <TextView
+                            android:id="@+id/doanhthuthang"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="bottom|center"
+                            android:text="0"
+                            android:textColor="#000"
+                            android:textFontWeight="400"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:id="@+id/textdoanhthuthang"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+
+                            android:layout_weight="1"
+                            android:drawableRight="@drawable/next_btn"
+                            android:gravity="center"
+                            android:text="Theo tháng"
+                            android:textColor="#807f84"
+                            android:textSize="14dp"
+                            tools:ignore="DuplicateIds" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layoutdoanhthunam"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:weightSum="2"
+                        tools:ignore="DuplicateIds">
+
+                        <TextView
+                            android:id="@+id/doanhthunam"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="bottom|center"
+                            android:text="0"
+                            android:textColor="#000"
+                            android:textFontWeight="400"
+                            android:textSize="20dp"
+                            tools:ignore="DuplicateIds" />
+
+                        <TextView
+                            android:id="@+id/textdoanhthunam"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:drawableRight="@drawable/next_btn"
+                            android:gravity="center"
+                            android:text="Theo năm"
+                            android:textColor="#807f84"
+                            android:textSize="14dp"
+                            tools:ignore="DuplicateIds" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layoutOrder"
                 android:layout_width="match_parent"
                 android:layout_height="140sp"
@@ -162,22 +317,6 @@
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-                <TextClock
-                    android:id="@+id/textClock"
-                    android:textColor="#807f84"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="100dp"
-                    android:layout_marginTop="9dp"
-                    android:drawableStart="@drawable/baseline_lock_clock_24"
-                    android:gravity="center"
-                    android:textSize="13sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:format24Hour="HH:mm:ss"
-                    android:format12Hour="hh:mm:ss a" />
-
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
@@ -337,7 +476,6 @@
                     </LinearLayout>
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layoutProduct"
                 android:layout_width="match_parent"
@@ -584,32 +722,6 @@
 
                     </LinearLayout>
 
-                    <View
-                        android:id="@+id/separator_straight"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/separator"
-                        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="DuplicateIds" />
-                    <TextView
-                        android:id="@+id/ttpolicy"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_weight="1"
-                        android:drawableRight="@drawable/next_action"
-                        android:gravity="center|start"
-                        android:paddingStart="8dp"
-                        android:text="Doanh số cửa hàng"
-                        android:textColor="#000000"
-                        android:textSize="14sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
                     <View
                         android:id="@+id/separator_straight"
                         android:layout_width="match_parent"

@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextClock;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -59,8 +61,10 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     List<User> listUser;
     List<Product> listProduct;
 
+
     TextClock textClock;
-    TextView tvName,folower,manager_product,DoanhSo,btnDoanhSo,btnUserTiemNang;
+    TextView tvName,folower,manager_product,DoanhSo,btnUserTiemNang;
+    TextView doanhthungay,doanhthuthang,doanhthunam;
     List<Photo> mListPhoto;
 
     private Timer mTimer;
@@ -92,18 +96,12 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 startActivity(intent);
             }
         });
-        btnDoanhSo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), OrderAnalysis.class);
-                startActivity(intent);
-            }
-        });
         btnUserTiemNang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ProductAnalysisActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), ProductAnalysisActivity.class);
+//                startActivity(intent);
+                Toast.makeText(getActivity(), "Chức năng đang phát triển", Toast.LENGTH_SHORT).show();
             }
         });
         btnProfile.setOnClickListener(new View.OnClickListener() {
@@ -141,7 +139,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private void Xacnhan() {
         AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
         alert.setTitle("Thông báo");
-        alert.setMessage("Xóa đơn hàng sẽ ảnh hưởng đến thống kê. Bạn muốn tiếp tục không ?");
+        alert.setMessage(" Bạn muốn đăng xuất ?");
         alert.setPositiveButton("Có", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -169,10 +167,26 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                     listOrder = response.body();
                     int total = 0;
                     int countChoXacNhan = 0,countDangGiao = 0,countDaGiao = 0,countDaHuy = 0;
+                    Double dtNgay =0.0, dtThang=0.0, dtNam=0.0;
                     //Đếm số lượng đơn hàng
                     for (Order order : listOrder){
                         if (order.getStatusOrder().equals(StatusOrder.DAGIAO))
                         {
+                            //Tính doanh thu theo ngày
+                            if (order.getUpdateat().equals(new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime()))){
+                                dtNgay += order.getPrice();
+                            }
+
+                            //Tính doanh thu theo tháng
+                            if (order.getUpdateat().substring(3,5).equals(new SimpleDateFormat("MM").format(Calendar.getInstance().getTime()))){
+                                dtThang += order.getPrice();
+                            }
+
+                            //Tính doanh thu theo năm
+                            if (order.getUpdateat().substring(6,10).equals(new SimpleDateFormat("yyyy").format(Calendar.getInstance().getTime()))){
+                                dtNam += order.getPrice();
+                            }
+
                             total += order.getPrice();//Tính tổng tiền
                             countDaGiao += 1;
                         } else if (order.getStatusOrder().equals(StatusOrder.CHOXACNHAN)) {
@@ -184,6 +198,9 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                         }
                     }
                     //Đưa dota lên giao diện
+                    doanhthungay.setText(dtNgay+"");
+                    doanhthuthang.setText(dtThang+"");
+                    doanhthunam.setText(dtNam+"");
                     DoanhSo.setText(total+"");
                     ChoXacNhan.setText(countChoXacNhan+"");
                     DangGiao.setText(countDangGiao+"");
@@ -271,7 +288,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         btnproductAnalyis = view.findViewById(R.id.productAnalyis);
         orderAnalyis = view.findViewById(R.id.orderAnalyis);
         manager_product = view.findViewById(R.id.manager_product);
-        btnDoanhSo = view.findViewById(R.id.ttpolicy);
         btnUserTiemNang = view.findViewById(R.id.tthelp);
         //Thời gian thực
         textClock = view.findViewById(R.id.textClock);
@@ -282,6 +298,9 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
         //Dữ liệu thống kê
 
+        doanhthungay = view.findViewById(R.id.doanhthungay);
+        doanhthuthang = view.findViewById(R.id.doanhthuthang);
+        doanhthunam = view.findViewById(R.id.doanhthunam);
         DoanhSo = view.findViewById(R.id.number_revenue);
         user_number = view.findViewById(R.id.user_number);
         ChoXacNhan = view.findViewById(R.id.number_process);
