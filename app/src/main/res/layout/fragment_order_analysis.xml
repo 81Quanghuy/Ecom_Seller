@@ -15,30 +15,37 @@
         android:background="@drawable/white_bg_no_radius">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/layoutTimeAnalysis"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
             android:orientation="horizontal"
             android:weightSum="2"
-            android:layout_margin="4dp"
-            android:id="@+id/layoutTimeAnalysis"
-            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints">
+
             <TextView
                 android:id="@+id/timeAnalysis"
                 android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="4dp"
                 android:layout_height="50dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:text="Lọc ngày tại đây"
                 android:textSize="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/pie_chart"
                 app:layout_constraintTop_toTopOf="parent" />
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnFilterOrder"
-                android:layout_margin="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_background"
                 android:gravity="center"
@@ -57,11 +64,42 @@
             app:layout_constraintTop_toTopOf="@+id/layoutTimeAnalysis"
             tools:ignore="MissingConstraints" />
 
+        <LinearLayout
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/pie_chart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/DoanhThuCuaOrder"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_margin="8dp"
+                android:layout_marginStart="94dp"
+                android:layout_marginTop="8dp"
+                android:text="Doanh thu:  "
+                android:textColor="#000000"
+                android:textSize="16dp"
+                app:layout_constraintStart_toStartOf="@+id/pie_chart"
+                app:layout_constraintTop_toBottomOf="@+id/pie_chart" />
+
+            <TextView
+                android:id="@+id/DoanhThuCuaOrder1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginTop="8dp"
+                android:text="0:0 "
+                android:textColor="#000000"
+                android:textSize="16dp"
+                app:layout_constraintRight_toRightOf="@+id/DoanhThuCuaOrder"
+                app:layout_constraintTop_toBottomOf="@+id/pie_chart" />
+        </LinearLayout>
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnPrintOrder"
             android:layout_width="match_parent"
-            android:layout_margin="8dp"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             android:background="@drawable/btn_background"
             android:gravity="center"
             android:text="In biểu đồ"

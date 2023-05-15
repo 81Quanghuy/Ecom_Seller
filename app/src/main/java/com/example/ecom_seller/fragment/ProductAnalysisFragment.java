@@ -56,6 +56,7 @@ public class ProductAnalysisFragment extends Fragment implements SwipeRefreshLay
     SwipeRefreshLayout productAnalysisFragment;
     List<Product> productList = new ArrayList<>();
     List<ReponseThongKeProduct> reponseThongKeProducts ;
+    Button btnPrintProduct;
     View view;
     ArrayList<String> labels = new ArrayList<>();
     ArrayList<String> numberRows = new ArrayList<>();
@@ -71,6 +72,12 @@ public class ProductAnalysisFragment extends Fragment implements SwipeRefreshLay
 
         view = inflater.inflate(R.layout.fragment_product_analysis, container, false );
         AnhXa();
+        btnPrintProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Chức năng đang bảo trì", Toast.LENGTH_SHORT).show();
+            }
+        });
         LoadData();
         VeBieuDo(status);
 
@@ -206,7 +213,7 @@ public class ProductAnalysisFragment extends Fragment implements SwipeRefreshLay
     private void AnhXa() {
         mProgressDialog = new ProgressDialog(getContext() );
         mProgressDialog.setMessage("Vui lòng đợi ...");
-
+        btnPrintProduct = view.findViewById(R.id.btnPrintProduct);
         productAnalysisFragment =view.findViewById(R.id.productAnalyisFragment);
         productAnalysisFragment.setOnRefreshListener(this);
         chart = view.findViewById(R.id.chartProduct);

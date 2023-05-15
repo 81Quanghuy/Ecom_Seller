@@ -119,7 +119,7 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                mProgressDialog.show();
-               DeleteAccount(user); v
+               DeleteAccount(user);
                // Toast.makeText(getApplicationContext(), "Chức năng đang phát triển", Toast.LENGTH_LONG).show();
             }
         });

@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
@@ -37,6 +38,7 @@ import com.example.ecom_seller.model.StatusOrder;
 import com.example.ecom_seller.model.User;
 import com.example.ecom_seller.roomDatabase.Database.UserDatabase;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -61,7 +63,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     List<User> listUser;
     List<Product> listProduct;
 
-
+    ConstraintLayout layoutDoanhThu;
     TextClock textClock;
     TextView tvName,folower,manager_product,DoanhSo,btnUserTiemNang;
     TextView doanhthungay,doanhthuthang,doanhthunam;
@@ -89,6 +91,13 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         AnhXa();
 
         LoadData();
+        layoutDoanhThu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), OrderAnalysis.class);
+                startActivity(intent);
+            }
+        });
         manager_product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -198,10 +207,12 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                         }
                     }
                     //Đưa dota lên giao diện
+                    DecimalFormat formatter = new DecimalFormat("###,###,###");
+                    String doanhso = formatter.format(total) + " VNĐ";
                     doanhthungay.setText(dtNgay+"");
                     doanhthuthang.setText(dtThang+"");
                     doanhthunam.setText(dtNam+"");
-                    DoanhSo.setText(total+"");
+                    DoanhSo.setText(doanhso);
                     ChoXacNhan.setText(countChoXacNhan+"");
                     DangGiao.setText(countDangGiao+"");
                     DaGiao.setText(countDaGiao+"");
@@ -284,6 +295,8 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         //SwipeRefreshLayout
         HomeFragment =view.findViewById(R.id.HomeFragment);
         HomeFragment.setOnRefreshListener(this);
+
+        layoutDoanhThu = view.findViewById(R.id.layoutDoanhThu);
         //Button
         btnproductAnalyis = view.findViewById(R.id.productAnalyis);
         orderAnalyis = view.findViewById(R.id.orderAnalyis);

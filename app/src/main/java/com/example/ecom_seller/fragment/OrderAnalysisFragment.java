@@ -43,6 +43,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -56,7 +57,7 @@ public class OrderAnalysisFragment extends Fragment implements SwipeRefreshLayou
     Button btnFilterOrder,btnPrintOrder;
     SwipeRefreshLayout orderAnalysisFragment;
     ProgressDialog mProgressDialog;
-    TextView timeAnalysis;
+    TextView timeAnalysis,DoanhThuCuaOrder1;
     PieChart pieChart;
     List<Order> orders;
     View view;
@@ -85,7 +86,8 @@ public class OrderAnalysisFragment extends Fragment implements SwipeRefreshLayou
         btnPrintOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                exportToPdf(getContext(),pieChart);
+                //exportToPdf(getContext(),pieChart);
+                Toast.makeText(getContext(), "Chức năng đang bảo trì", Toast.LENGTH_SHORT).show();
             }
         });
         timeAnalysis.setOnClickListener(new View.OnClickListener() {
@@ -192,6 +194,7 @@ public class OrderAnalysisFragment extends Fragment implements SwipeRefreshLayou
             @Override
             public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
                 orders = response.body();
+                Double doanhthu=0.0;
                 mProgressDialog.dismiss();
                 float total = orders.size();
                 float countChoXacNhan = 0,countDangGiao = 0,countDaGiao = 0,countDaHuy = 0, countTuChoi = 0;
@@ -201,6 +204,7 @@ public class OrderAnalysisFragment extends Fragment implements SwipeRefreshLayou
                     } else if (order.getStatusOrder().equals(StatusOrder.CHOXACNHAN)){
                         countChoXacNhan++;
                     } else if (order.getStatusOrder().equals(StatusOrder.DAGIAO)){
+                        doanhthu = doanhthu + order.getPrice();
                         countDaGiao++;
                     } else if (order.getStatusOrder().equals(StatusOrder.HUY)){
                         countDaHuy++;
@@ -208,6 +212,9 @@ public class OrderAnalysisFragment extends Fragment implements SwipeRefreshLayou
                         countTuChoi++;
                     }
                 }
+                DecimalFormat formatter = new DecimalFormat("###,###,###");
+                String vnd = formatter.format(doanhthu) + " VNĐ";
+                DoanhThuCuaOrder1.setText(vnd);
                 Log.e("TAG", "VeBieuDoTronAPI: "+total+countChoXacNhan+" "+countDaGiao+" "+countDaHuy+" "+countTuChoi+" "+countDangGiao );
                 VeBieuDoTron((countChoXacNhan/total)*100,(countDaGiao/total)*100,(countDaHuy/total)*100,(countTuChoi/total)*100,(countDangGiao/total)*100);
             }
@@ -223,6 +230,7 @@ public class OrderAnalysisFragment extends Fragment implements SwipeRefreshLayou
     private void AnhXa() {
         timeAnalysis = view.findViewById(R.id.timeAnalysis);
         mProgressDialog = new ProgressDialog(getContext() );
+        DoanhThuCuaOrder1 = view.findViewById(R.id.DoanhThuCuaOrder1);
         mProgressDialog.setMessage("Vui lòng đợi ...");
         orderAnalysisFragment = view.findViewById(R.id.orderAnalyisFragment);
         orderAnalysisFragment.setOnRefreshListener(this);
